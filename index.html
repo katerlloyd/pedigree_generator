@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Pedigree chart generator created by Kate Clark.">
+        <title>Pedigree Chart Generator</title>
+        <link rel="shortcut icon" href="favicon.ico">
+        <link rel="stylesheet" href="css/styles.css" media="screen">
+        <script defer src="js/familytree.js"></script>
+        <script defer src="js/site.js"></script>
+        <!-- <reference path="orgchart.d.ts" />
+        <reference path="familytree.d.ts" /> -->
+    </head>
+    <body>
+        <header>
+            <!-- <picture>
+                <img class="logo" src="images/logo-white.svg" alt="Circle with lines intersecting through it" loading="lazy" height="70" width="70">
+            </picture> -->
+            <section class="headings">
+                <h1>Pedigree Chart Generator</h1>
+            </section>
+        </header>
+        <!-- <nav>
+            <ul class="navigation">
+                <li class="bar-icon"><a href="#">&#9776;</a></li>
+                <li class="active"><a href="#">Home</a></li>  
+            </ul>
+        </nav> -->
+        <main>
+            <p>Please select an inheritance type: </p>
+            <ul>
+                <li>Autosomal Dominant</li>
+                <li>Autosomal Recessive</li>
+                <li>X-Linked Dominant</li>
+                <li>X-Linked Recessive</li>
+                <li>Y-Linked</li>
+            </ul>
+
+            <p>Please select the genotypes of the first two individuals: </p>
+            <p>Male</p>
+            <ul>
+                <li>AA</li>
+                <li>Aa</li>
+                <li>aa</li>
+            </ul>
+            <ul>
+                <li>X<sup>A</sup>Y</li>
+                <li>X<sup>a</sup>Y</li>
+                <li>Y-Linked (doesn't matter)</li>
+            </ul>
+            
+            <p>Female</p>
+            <ul>
+                <li>AA</li>
+                <li>Aa</li>
+                <li>aa</li>
+            </ul>
+            <ul>
+                <li>X<sup>A</sup>X<sup>A</sup></li>
+                <li>X<sup>A</sup>X<sup>a</sup></li>
+                <li>X<sup>a</sup>X<sup>a</sup></li>
+                <li>Y-Linked (doesn't matter)</li>
+            </ul>
+
+            <div class="children">
+                <p>How many children would you like them to have? </p>
+                <select name="children" id="children">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+            </div>
+
+            <div class="gen">
+                <p>How many generations would you like to chart (counting the first generation)? </p>
+                <select name="gen" id="gen"></select>
+            </div>
+
+            <p>Please select a setting for all individuals who marry into the family: </p>
+            <select name="spouses" id="spouses">
+                <option value="unaffected">All spouses are unaffected</option>
+                <option value="random">All spouses are randomly assigned a genotype</option>
+            </select>
+
+            <!-- <div class="spouse-grid">
+                <div class="spouse-option">
+                    <img src="https://placeimg.com/75/75/nature" at="Image placeholder1">
+                    <p>All spouses are unaffected</p>
+                </div>
+                <div class="spouse-option">
+                    <img src="https://placeimg.com/75/75/tech" at="Image placeholder2">
+                    <p>All spouses are randomly assigned a genotype</p>
+                </div>
+            </div> -->
+            <!-- <div class="selection-spouse">
+                <input type="radio" id="html" name="fav_language" value="HTML" checked>
+            <label for="html">All spouses are unaffected</label>
+            </div>
+            <div class="selection-spouse">
+                <input type="radio" id="html" name="fav_language" value="HTML">
+                <label for="html">All spouses are randomly assigned a genotype</label>
+            </div> -->
+
+            <button type="button" id="generate-pedigree">Generate Pedigree</button>
+
+            <div style="width:100%; height:700px;" id="tree"></div>
+
+            <!-- <canvas id="pedigree-canvas">Your browser does not support the canvas element.</canvas> -->
+
+            <button type="button" id="download-pedigree">Download Pedigree</button>
+        </main>
+        <footer>
+            <p>&#169; <span id="copyright-year"></span> Pedigree Chart Generator | Created by Kate Clark</p>
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,85 @@
+:root {
+    --main-color: #51680e;
+    --highlight-color: #c9dd8e;
+    --light-color: #d9e3bc;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14pt;
+    margin: 0 5%;
+}
+
+select {
+    padding: 0.5rem;
+    font-size: 16pt;
+    font-weight: bold;
+    background-color: var(--highlight-color);
+    color: var(--main-color);
+    outline: 2px solid var(--main-color);
+    border-radius: 15px;
+}
+
+select:focus {
+    background-color: var(--light-color);
+}
+
+select:hover {
+    cursor: pointer;
+}
+
+/* .spouse-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 1rem;
+    max-width: fit-content;
+} */
+
+/* .spouse-option {
+    display: flex;
+    padding: 1rem;
+    border: 3px solid var(--main-color);
+    border-radius: 15px;
+    background-color: var(--highlight-color);
+} */
+
+/* .spouse-option p {
+    padding: 1rem;
+} */
+
+img {
+    max-width: 100%;
+}
+
+button {
+    display: block;
+    color: var(--light-color);
+    padding: 1rem;
+    margin: 1rem 0;
+    border: 3px solid var(--main-color);
+    border-radius: 15px;
+    background-color: var(--main-color);
+    font-size: 16pt;
+    font-weight: bold;
+}
+
+button:hover {
+    color: var(--main-color);
+    background-color: var(--light-color);
+    cursor: pointer;
+}
+
+button:focus {
+    color: #ffffff;
+}
+
+canvas {
+    background: #f8f8f8;
+    padding: 0;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+footer {
+    text-align: center;
+}
