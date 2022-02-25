@@ -12,8 +12,8 @@
 
 // let inheritanceType = 'Autosomal Dominant';
 // let inheritanceType = 'Autosomal Recessive';
-let inheritanceType = 'X-Linked Dominant';
-// let inheritanceType = 'X-Linked Recessive';
+// let inheritanceType = 'X-Linked Dominant';
+let inheritanceType = 'X-Linked Recessive';
 // let inheritanceType = 'Y-Linked';
 
 let selectGen = document.querySelector('select#gen');
@@ -229,7 +229,7 @@ const renderType = (index) => {
 }
 
 // const setNumberofChildren = () => Math.floor(Math.random() * 5);
-const setNumberofChildren = () => Math.ceil(Math.random() * 4);
+const setNumberofChildren = () => Math.ceil(Math.random() * 3);
 
 // const getPids = (index) => family.config.nodes[index].pids[0];
 
@@ -353,7 +353,7 @@ const createFirstGeneration = () => {
     // let maleGenotype = 'AA';
     // let femaleGenotype = 'AA';
     let maleGenotype = 'XAY';
-    let femaleGenotype = 'XaXa';
+    let femaleGenotype = 'XAXa';
 
     let firstMale = {id: 0, mid: null, fid: null, pids: [1], genotype: maleGenotype, gender: "male", affected: null, generation: 1};
     family.config.nodes.push(firstMale);
