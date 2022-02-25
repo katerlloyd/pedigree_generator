@@ -353,7 +353,7 @@ const createChildren = (mid, fid, numberOfChildren, currentGeneration) => {
 
 const createFirstGeneration = () => {
     let maleGenotype = 'Aa';
-    // let femaleGenotype = 'Aa';
+    let femaleGenotype = 'Aa';
     // let maleGenotype = 'XAXa';
     // let femaleGenotype = 'XaY';
 
