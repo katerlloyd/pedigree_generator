@@ -110,12 +110,16 @@ const setGenotype = (index) => {
         femaleGenotype = family.config.nodes[getMid(index)].genotype;
     }
 
-    if (maleGenotype.length >= 2) {
+    if (maleGenotype.length > 2) {
         maleGenotype = [maleGenotype.slice(0, 2), maleGenotype.slice(2)];
+    } else {
+        maleGenotype = [maleGenotype.slice(0, 1), maleGenotype.slice(1)];
     }
 
-    if (femaleGenotype.length >= 2) {
+    if (femaleGenotype.length > 2) {
         femaleGenotype = [femaleGenotype.slice(0, 2), femaleGenotype.slice(2)];
+    } else {
+        femaleGenotype = [femaleGenotype.slice(0, 1), femaleGenotype.slice(1)];
     }
 
     let allele1 = maleGenotype[num1];
@@ -290,7 +294,7 @@ const createPair = (index, generation) => {
         setGender(pairId);
         setAffected(pairId);
         setCarrier(pairId);
-        renderType(pairId);
+        // renderType(pairId);
     }
 
     family.config.nodes[index].pids[0] = pairId;
@@ -323,7 +327,7 @@ const createIndividual = (mid, fid, generation) => {
     setGender(currentId);
     setAffected(currentId);
     setCarrier(currentId);
-    renderType(currentId);
+    // renderType(currentId);
 
     let num = Math.ceil(Math.random() * 4);
 
@@ -348,22 +352,22 @@ const createChildren = (mid, fid, numberOfChildren, currentGeneration) => {
 }
 
 const createFirstGeneration = () => {
-    // let maleGenotype = 'Aa';
+    let maleGenotype = 'Aa';
     // let femaleGenotype = 'Aa';
-    let maleGenotype = 'XAXa';
-    let femaleGenotype = 'XaY';
+    // let maleGenotype = 'XAXa';
+    // let femaleGenotype = 'XaY';
 
     let firstMale = {id: 0, mid: null, fid: null, pids: [1], genotype: maleGenotype, gender: "male", affected: null, generation: 1};
     family.config.nodes.push(firstMale);
     setAffected(0);
     setCarrier(0);
-    renderType(0);
+    // renderType(0);
 
     let firstFemale = {id: 1, mid: null, fid: null, pids: [0], genotype: femaleGenotype, gender: "female", affected: null, generation: 1};
     family.config.nodes.push(firstFemale);
     setAffected(1);
     setCarrier(1);
-    renderType(1);
+    // renderType(1);
 
     createChildren(1, 0, 4, getGeneration(0));
 
