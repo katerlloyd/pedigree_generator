@@ -11,8 +11,8 @@
 
 
 // let inheritanceType = 'Autosomal Dominant';
-let inheritanceType = 'Autosomal Recessive';
-// let inheritanceType = 'X-Linked Dominant';
+// let inheritanceType = 'Autosomal Recessive';
+let inheritanceType = 'X-Linked Dominant';
 // let inheritanceType = 'X-Linked Recessive';
 // let inheritanceType = 'Y-Linked';
 
@@ -42,6 +42,7 @@ const family = new FamilyTree(document.getElementById("tree"), {
         field_2: "affected",
         field_3: "carrier",
         field_4: "generation",
+        img_0: "img",
         field_5: "html"
     },
     nodes: []
@@ -214,25 +215,21 @@ const getCarrier = (index) => family.config.nodes[index].carrier;
 const renderType = (index) => {
     if (getCarrier(index)) {
         if (getGender(index) === 'male') {
-            FamilyTree.templates.tommy_male.node = 
-            '<rect x="0" y="0" height="50" width="50" stroke-width="2" fill="#ffffff" stroke="#000000" rx="7" ry="7"></rect><rect x="20" y="20" height="10" width="10" stroke-width="2" fill="#000000" stroke="#000000" rx="100" ry="100"></rect>';
+            family.config.nodes[index].img = '<rect x="0" y="0" height="50" width="50" stroke-width="2" fill="#ffffff" stroke="#000000" rx="7" ry="7"></rect><rect x="20" y="20" height="10" width="10" stroke-width="2" fill="#000000" stroke="#000000" rx="100" ry="100"></rect>';
         } else if (getGender(index) === 'female') {
-            FamilyTree.templates.tommy_female.node = 
-            '<rect x="0" y="0" height="50" width="50" stroke-width="2" fill="#ffffff" stroke="#000000" rx="100" ry="100"></rect><rect x="20" y="20" height="10" width="10" stroke-width="2" fill="#000000" stroke="#000000" rx="100" ry="100"></rect>';
+            family.config.nodes[index].img = '<rect x="0" y="0" height="50" width="50" stroke-width="2" fill="#ffffff" stroke="#000000" rx="100" ry="100"></rect><rect x="20" y="20" height="10" width="10" stroke-width="2" fill="#000000" stroke="#000000" rx="100" ry="100"></rect>';
         }
     } else {
         if (getAffected(index) && getGender(index) === 'male') {
-            FamilyTree.templates.tommy_male.node = 
-            '<rect x="0" y="0" height="50" width="50" stroke-width="2" fill="#0000000" stroke="#000000" rx="7" ry="7"></rect>';
+            family.config.nodes[index].img = '<rect x="0" y="0" height="50" width="50" stroke-width="2" fill="#0000000" stroke="#000000" rx="7" ry="7"></rect>';
         } else if (getAffected(index) && getGender(index) === 'female') {
-            FamilyTree.templates.tommy_female.node = 
-            '<rect x="0" y="0" height="50" width="50" stroke-width="2" fill="#000000" stroke="#000000" rx="100" ry="100"></rect>';
+            family.config.nodes[index].img = '<rect x="0" y="0" height="50" width="50" stroke-width="2" fill="#000000" stroke="#000000" rx="100" ry="100"></rect>';
         }
     }
 }
 
 // const setNumberofChildren = () => Math.floor(Math.random() * 5);
-const setNumberofChildren = () => Math.ceil(Math.random() * 3);
+const setNumberofChildren = () => Math.ceil(Math.random() * 4);
 
 // const getPids = (index) => family.config.nodes[index].pids[0];
 
@@ -292,10 +289,11 @@ const createPair = (index, generation) => {
     while (getGender(pairId) !== getOppositeGender(index)) {
         setGenotype(pairId);
         setGender(pairId);
-        setAffected(pairId);
-        setCarrier(pairId);
-        // renderType(pairId);
     }
+
+    setAffected(pairId);
+    setCarrier(pairId);
+    renderType(pairId);
 
     family.config.nodes[index].pids[0] = pairId;
     family.config.nodes[pairId].pids[0] = index;
@@ -327,7 +325,7 @@ const createIndividual = (mid, fid, generation) => {
     setGender(currentId);
     setAffected(currentId);
     setCarrier(currentId);
-    // renderType(currentId);
+    renderType(currentId);
 
     let num = Math.ceil(Math.random() * 4);
 
@@ -352,22 +350,22 @@ const createChildren = (mid, fid, numberOfChildren, currentGeneration) => {
 }
 
 const createFirstGeneration = () => {
-    let maleGenotype = 'Aa';
-    let femaleGenotype = 'Aa';
-    // let maleGenotype = 'XAXa';
-    // let femaleGenotype = 'XaY';
+    // let maleGenotype = 'AA';
+    // let femaleGenotype = 'AA';
+    let maleGenotype = 'XAY';
+    let femaleGenotype = 'XaXa';
 
     let firstMale = {id: 0, mid: null, fid: null, pids: [1], genotype: maleGenotype, gender: "male", affected: null, generation: 1};
     family.config.nodes.push(firstMale);
     setAffected(0);
     setCarrier(0);
-    // renderType(0);
+    renderType(0);
 
     let firstFemale = {id: 1, mid: null, fid: null, pids: [0], genotype: femaleGenotype, gender: "female", affected: null, generation: 1};
     family.config.nodes.push(firstFemale);
     setAffected(1);
     setCarrier(1);
-    // renderType(1);
+    renderType(1);
 
     createChildren(1, 0, 4, getGeneration(0));
 

@@ -7177,7 +7177,7 @@ var FamilyTree = function (e, t) {
       "#aeaeae",
       5,
       5
-    )}\n            </g>\n            <clipPath id="base_img_0"><rect id="base_img_0_stroke" stroke-width="3" stroke="#fff" x="170" y="-5" rx="25" ry="25" width="70" height="70"></rect></clipPath>`,
+    )}\n            </g>\n            <clipPath id="base_img_0"><rect id="base_img_0_stroke" stroke-width="3" stroke="#fff" x="0" y="0" rx="7" ry="7" width="50" height="50"></rect></clipPath>`,
     size: [50, 50],
     linkAdjuster: { fromX: 0, fromY: 0, toX: 0, toY: 0 },
     ripple: { radius: 0, color: "#e6e6e6", rect: null },
@@ -7189,19 +7189,19 @@ var FamilyTree = function (e, t) {
     pointer:
       '<g data-pointer="pointer" transform="matrix(0,0,0,0,100,100)"><radialGradient id="pointerGradient"><stop stop-color="#ffffff" offset="0" /><stop stop-color="#C1C1C1" offset="1" /></radialGradient><circle cx="16" cy="16" r="16" stroke-width="1" stroke="#acacac" fill="url(#pointerGradient)"></circle></g>',
     node: '<rect x="0" y="0" height="{h}" width="{w}" stroke-width="1" stroke="#000000" rx="7" ry="7"></rect>',
-    menuButton:
-      '<div style="position:absolute;right:{p}px;top:{p}px; width:40px;height:50px;cursor:pointer;" ' +
-      FamilyTree.attr.control_export_menu +
-      '=""><hr style="background-color: #7A7A7A; height: 3px; border: none;"><hr style="background-color: #7A7A7A; height: 3px; border: none;"><hr style="background-color: #7A7A7A; height: 3px; border: none;"></div>',
+    // menuButton:
+    //   '<div style="position:absolute;right:{p}px;top:{p}px; width:40px;height:50px;cursor:pointer;" ' +
+    //   FamilyTree.attr.control_export_menu +
+    //   '=""><hr style="background-color: #7A7A7A; height: 3px; border: none;"><hr style="background-color: #7A7A7A; height: 3px; border: none;"><hr style="background-color: #7A7A7A; height: 3px; border: none;"></div>',
     padding: [50, 20, 35, 20],
-    nodeMenuButton: `<use ${FamilyTree.attr.control_node_menu_id}="{id}" x="220" y="95" xlink:href="#base_node_menu"/>`,
-    nodeTreeMenuButton:
-      '<use data-ctrl-n-t-menu-id="{id}" x="10" y="10" xlink:href="#base_tree_menu"/>',
-    nodeTreeMenuCloseButton:
-      '<use data-ctrl-n-t-menu-c="" x="10" y="10" xlink:href="#base_tree_menu_close"/>',
+    // nodeMenuButton: `<use ${FamilyTree.attr.control_node_menu_id}="{id}" x="220" y="95" xlink:href="#base_node_menu"/>`,
+    // nodeTreeMenuButton:
+    //   '<use data-ctrl-n-t-menu-id="{id}" x="10" y="10" xlink:href="#base_tree_menu"/>',
+    // nodeTreeMenuCloseButton:
+    //   '<use data-ctrl-n-t-menu-c="" x="10" y="10" xlink:href="#base_tree_menu_close"/>',
     up: '<use x="110" y="-10" xlink:href="#base_up"/>',
     img_0:
-      '<use xlink:href="#base_img_0_stroke" /><image preserveAspectRatio="xMidYMid slice" clip-path="url(#base_img_0)" xlink:href="{val}"  x="170" y="-5"  width="70" height="70"></image>',
+      '{val}',
     link_field_0:
       '<text text-anchor="middle" fill="#aeaeae" ' +
       FamilyTree.attr.width +
@@ -7291,7 +7291,7 @@ var FamilyTree = function (e, t) {
     FamilyTree.templates.tommy
   )),
   (FamilyTree.templates.tommy_female.node =
-    '<rect x="0" y="0" height="50" width="50" stroke-width="2" fill="#ffffff" stroke="#000000" rx="100" ry="100"></rect>'),
+    '<rect x="0" y="0" height="{h}" width="{w}" stroke-width="2" fill="#ffffff" stroke="#000000" rx="100" ry="100"></rect>'),
   // (FamilyTree.templates.tommy_female.field_2 = 
   //   '<rect x="0" y="0" height="50" width="50" stroke-width="2" fill="#000000" stroke="#000000" rx="100" ry="100"></rect>'),
 //   (FamilyTree.templates.hugo = Object.assign({}, FamilyTree.templates.base)),
