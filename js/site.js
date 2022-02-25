@@ -11,9 +11,9 @@
 
 
 // let inheritanceType = 'Autosomal Dominant';
-// let inheritanceType = 'Autosomal Recessive';
+let inheritanceType = 'Autosomal Recessive';
 // let inheritanceType = 'X-Linked Dominant';
-let inheritanceType = 'X-Linked Recessive';
+// let inheritanceType = 'X-Linked Recessive';
 // let inheritanceType = 'Y-Linked';
 
 let selectGen = document.querySelector('select#gen');
