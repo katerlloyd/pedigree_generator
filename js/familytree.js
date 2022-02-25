@@ -79,10 +79,10 @@ var FamilyTree = function (e, t) {
   FamilyTree._validateConfig(this.config) &&
     ((this._vScroll = {}),
     this.config.ui || (this.ui = FamilyTree.ui),
-    this.config.editUI
-      ? (this.editUI = this.config.editUI)
-      : (this.editUI = new FamilyTree.editUI()),
-    this.editUI.init(this),
+    // this.config.editUI
+    //   ? (this.editUI = this.config.editUI)
+    //   : (this.editUI = new FamilyTree.editUI()),
+    // this.editUI.init(this),
     (this.manager = new FamilyTree.manager(this.config, this._layoutConfigs)),
     this.config.searchUI
       ? (this.searchUI = this.config.searchUI)
@@ -297,8 +297,8 @@ var FamilyTree = function (e, t) {
             t != FamilyTree.action.exporting &&
               ((a.nodes = e.nodes),
               (a.visibleNodeIds = e.visibleNodeIds),
-              (a.roots = e.roots)),
-              (a.editUI.fields = e.allFields);
+              (a.roots = e.roots));
+              // (a.editUI.fields = e.allFields);
             var n = { defs: "" };
             FamilyTree.events.publish("renderdefs", [a, n]);
             var o = a.ui.defs(n.defs),
@@ -1754,271 +1754,271 @@ var FamilyTree = function (e, t) {
       r
     );
   }),
-  (FamilyTree.editUI = function () {}),
-  (FamilyTree.editUI.prototype.init = function (e) {
-    (this.obj = e), (this.fields = null), (this._event_id = FamilyTree._guid());
-  }),
-  (FamilyTree.editUI.prototype.on = function (e, t) {
-    return FamilyTree.events.on(e, t, this._event_id), this;
-  }),
-  (FamilyTree.editUI.prototype.show = function (e, t, i) {
-    if ((this.hide(), !1 === FamilyTree.events.publish("show", [this, e])))
-      return !1;
-    var r = this,
-      a = this.content(e, t, i);
-    this.obj.element.appendChild(a.element),
-      FamilyTree.input.init(this.obj.element),
-      i
-        ? !t && a.focusId && FamilyTree.editUI.ficusElement(a.focusId)
-        : (this.interval = FamilyTree.anim(
-            a.element,
-            { right: -20, opacity: 0 },
-            { right: 0, opacity: 1 },
-            300,
-            FamilyTree.anim.outSin,
-            function () {
-              !t && a.focusId && FamilyTree.editUI.ficusElement(a.focusId);
-            }
-          )),
-      this.obj.element
-        .querySelector("[data-edit-from-close]")
-        .addEventListener("click", function (e) {
-          r.hide();
-        }),
-      this.obj.element
-        .querySelector("[data-edit-from-cancel]")
-        .addEventListener("click", function (e) {
-          r.hide();
-        }),
-      this.obj.element
-        .querySelector("[data-edit-from-save]")
-        .addEventListener("click", function (t) {
-          var i = FamilyTree.input.validateAndGetData(a.element);
-          if (!1 !== i) {
-            var n = r.obj.get(e),
-              o = FamilyTree.mergeDeep(n, i);
-            r.obj.updateNode(o, null, !0), r.hide();
-          }
-        });
-    for (
-      var n = this.obj.element.querySelectorAll("[bft-input-btn]"), o = 0;
-      o < n.length;
-      o++
-    ) {
-      n[o].addEventListener("click", function (t) {
-        FamilyTree.events.publish("element-btn-click", [
-          r,
-          { input: this.parentNode.querySelector("input"), nodeId: e },
-        ]);
-      });
-    }
-    this.obj.element
-      .querySelector("[data-add-more-fields-btn]")
-      .addEventListener("click", function (e) {
-        e.stopPropagation(), e.preventDefault();
-        var t = this,
-          i = FamilyTree.elements.textbox(
-            {},
-            {
-              type: "textbox",
-              label: r.obj.config.editForm.addMoreFieldName,
-              btn: r.obj.config.editForm.addMoreBtn,
-            },
-            "280px"
-          );
-        t.parentNode.insertAdjacentHTML("beforebegin", i.html),
-          (t.style.display = "none"),
-          FamilyTree.input.init(t.parentNode.previousSibling);
-        var a = document.getElementById(i.id);
-        a.focus(),
-          a.nextElementSibling.addEventListener("click", function (e) {
-            e.stopPropagation(), e.preventDefault();
-            var i = r.obj.element.querySelector(
-              '[data-binding="' + a.value + '"]'
-            );
-            if (FamilyTree.isNEU(a.value) || i) a.focus();
-            else {
-              var n = FamilyTree.elements.textbox(
-                {},
-                { type: "textbox", label: a.value, binding: a.value },
-                "280px"
-              );
-              a.parentNode.parentNode.parentNode.removeChild(
-                a.parentNode.parentNode
-              ),
-                t.parentNode.insertAdjacentHTML("beforebegin", n.html),
-                (t.style.display = ""),
-                FamilyTree.input.init(t.parentNode.previousSibling),
-                document.getElementById(n.id).focus();
-            }
-          });
-      }),
-      this.obj.element
-        .querySelector("[data-bft-edit-from-btns]")
-        .addEventListener("click", function (t) {
-          for (
-            var i = t.target;
-            i && i.hasAttribute && !i.hasAttribute("data-edit-from-btn");
+  // (FamilyTree.editUI = function () {}),
+  // (FamilyTree.editUI.prototype.init = function (e) {
+  //   (this.obj = e), (this.fields = null), (this._event_id = FamilyTree._guid());
+  // }),
+  // (FamilyTree.editUI.prototype.on = function (e, t) {
+  //   return FamilyTree.events.on(e, t, this._event_id), this;
+  // }),
+  // (FamilyTree.editUI.prototype.show = function (e, t, i) {
+  //   if ((this.hide(), !1 === FamilyTree.events.publish("show", [this, e])))
+  //     return !1;
+  //   var r = this,
+  //     a = this.content(e, t, i);
+  //   this.obj.element.appendChild(a.element),
+  //     FamilyTree.input.init(this.obj.element),
+  //     i
+  //       ? !t && a.focusId && FamilyTree.editUI.ficusElement(a.focusId)
+  //       : (this.interval = FamilyTree.anim(
+  //           a.element,
+  //           { right: -20, opacity: 0 },
+  //           { right: 0, opacity: 1 },
+  //           300,
+  //           FamilyTree.anim.outSin,
+  //           function () {
+  //             !t && a.focusId && FamilyTree.editUI.ficusElement(a.focusId);
+  //           }
+  //         )),
+  //     this.obj.element
+  //       .querySelector("[data-edit-from-close]")
+  //       .addEventListener("click", function (e) {
+  //         r.hide();
+  //       }),
+  //     this.obj.element
+  //       .querySelector("[data-edit-from-cancel]")
+  //       .addEventListener("click", function (e) {
+  //         r.hide();
+  //       }),
+  //     this.obj.element
+  //       .querySelector("[data-edit-from-save]")
+  //       .addEventListener("click", function (t) {
+  //         var i = FamilyTree.input.validateAndGetData(a.element);
+    //       if (!1 !== i) {
+    //         var n = r.obj.get(e),
+    //           o = FamilyTree.mergeDeep(n, i);
+    //         r.obj.updateNode(o, null, !0), r.hide();
+    //       }
+    //     });
+    // for (
+    //   var n = this.obj.element.querySelectorAll("[bft-input-btn]"), o = 0;
+    //   o < n.length;
+    //   o++
+    // ) {
+    //   n[o].addEventListener("click", function (t) {
+    //     FamilyTree.events.publish("element-btn-click", [
+    //       r,
+    //       { input: this.parentNode.querySelector("input"), nodeId: e },
+    //     ]);
+    //   });
+    // }
+    // this.obj.element
+    //   .querySelector("[data-add-more-fields-btn]")
+    //   .addEventListener("click", function (e) {
+        // e.stopPropagation(), e.preventDefault();
+        // var t = this,
+        //   i = FamilyTree.elements.textbox(
+        //     {},
+        //     {
+        //       type: "textbox",
+        //       label: r.obj.config.editForm.addMoreFieldName,
+        //       btn: r.obj.config.editForm.addMoreBtn,
+        //     },
+        //     "280px"
+        //   );
+        // t.parentNode.insertAdjacentHTML("beforebegin", i.html),
+        //   (t.style.display = "none"),
+        //   FamilyTree.input.init(t.parentNode.previousSibling);
+        // var a = document.getElementById(i.id);
+        // a.focus(),
+        //   a.nextElementSibling.addEventListener("click", function (e) {
+        //     e.stopPropagation(), e.preventDefault();
+        //     var i = r.obj.element.querySelector(
+        //       '[data-binding="' + a.value + '"]'
+        //     );
+        //     if (FamilyTree.isNEU(a.value) || i) a.focus();
+        //     else {
+        //       var n = FamilyTree.elements.textbox(
+        //         {},
+        //         { type: "textbox", label: a.value, binding: a.value },
+      //           "280px"
+      //         );
+      //         a.parentNode.parentNode.parentNode.removeChild(
+      //           a.parentNode.parentNode
+      //         ),
+      //           t.parentNode.insertAdjacentHTML("beforebegin", n.html),
+      //           (t.style.display = ""),
+      //           FamilyTree.input.init(t.parentNode.previousSibling),
+      //           document.getElementById(n.id).focus();
+      //       }
+      //     });
+      // }),
+      // this.obj.element
+      //   .querySelector("[data-bft-edit-from-btns]")
+      //   .addEventListener("click", function (t) {
+      //     for (
+      //       var i = t.target;
+      //       i && i.hasAttribute && !i.hasAttribute("data-edit-from-btn");
 
-          )
-            i = i.parentNode;
-          if (i && i.hasAttribute) {
-            var n = i.getAttribute("data-edit-from-btn"),
-              o = {
-                button: r.obj.config.editForm.buttons[n],
-                name: n,
-                nodeId: e,
-                event: t,
-              };
-            if (!1 === FamilyTree.events.publish("button-click", [r, o]))
-              return !1;
-            switch (n) {
-              case "edit":
-                r.obj.editUI.show(e, !1, !0);
-                break;
-              case "pdf":
-                r.obj.exportPDFProfile({ id: e, filename: a.title }), r.hide();
-                break;
-              case "png":
-                r.obj.exportPNGProfile({ id: e, filename: a.title }), r.hide();
-                break;
-              case "share":
-                r.obj.shareProfile(e);
-                break;
-              case "remove":
-                r.obj.removeNode(e, null, !0), r.hide();
-            }
-          }
-        });
-  }),
-  (FamilyTree.editUI.ficusElement = function (e) {
-    if (!FamilyTree.isNEU(e)) {
-      var t = document.getElementById(e);
-      t &&
-        (t.focus(),
-        t.value &&
-          t.value.length &&
-          (t.selectionStart = t.selectionEnd = t.value.length));
-    }
-  }),
-  (FamilyTree.editUI.prototype.setAvatar = function (e) {
-    var t = this.obj.element.querySelector("#bft-avatar");
-    FamilyTree.isNEU(e)
-      ? (t.innerHTML = FamilyTree.icon.user(150, 150, "#8C8C8C", 0, 0))
-      : (t.innerHTML = `<img style="width: 100%;height:100%;border-radius: 50%;" src="${e}"></img>`);
-  }),
-  (FamilyTree.editUI.prototype.content = function (e, t, i, r, a) {
-    var n,
-      o = this.obj.config.editForm.readOnly,
-      l = JSON.parse(JSON.stringify(this.obj.config.editForm.elements)),
-      s = this.obj.config.editForm.addMore,
-      d = this.obj.config.editForm.buttons,
-      c = this.obj.config.editForm.titleBinding,
-      m = this.obj.config.editForm.photoBinding,
-      p = this.obj.getNode(e),
-      h = this.obj._get(e),
-      f = FamilyTree.t(p.templateName, p.min, this.obj.getScale()),
-      u = h[c],
-      y = h[m];
-    if (this.obj.config.editForm.generateElementsFromFields)
-      for (var g = 0; g < this.fields.length; g++) {
-        var b = this.fields[g];
-        if ("tags" != b) {
-          for (var T = !1, v = 0; v < l.length; v++) {
-            if (Array.isArray(l[v])) {
-              for (var F = 0; F < l[v].length; F++)
-                if (b == l[v][F].binding) {
-                  T = !0;
-                  break;
-                }
-            } else if (b == l[v].binding) {
-              T = !0;
-              break;
-            }
-            if (T) break;
-          }
-          T || l.push({ type: "textbox", label: b, binding: b });
-        }
-      }
-    FamilyTree.isNEU(u) && (u = ""),
-      (y = FamilyTree.isNEU(y)
-        ? FamilyTree.icon.user(150, 150, "#8C8C8C", 0, 0)
-        : `<img style="width: 100%;height:100%;border-radius: 50%;" src="${y}"></img>`);
-    var x = !t,
-      _ = t ? "display:none;" : "",
-      w = t || !s ? "display:none;" : "",
-      k = f.editFormHeaderColor
-        ? `style="background-color:${f.editFormHeaderColor};"`
-        : "",
-      C = document.createElement("form");
-    if (
-      (C.setAttribute("data-bft-edit-form", ""),
-      C.classList.add("bft-edit-form"),
-      C.classList.add(this.obj.config.mode),
-      C.classList.add(p.templateName),
-      C.classList.add(FamilyTree.ui._defsIds[p.templateName]),
-      Array.isArray(p.tags) && p.tags.length)
-    )
-      for (g = 0; g < p.tags.length; g++) C.classList.add(p.tags[g]);
-    (C.style.display = "flex"),
-      (C.style.opacity = i ? 1 : 0),
-      (C.style.right = i ? 0 : "-20px"),
-      r && (C.style.width = r);
-    var S = [],
-      I = a
-        ? ""
-        : '<svg data-edit-from-close class="bft-edit-form-close"><path style="fill:#ffffff;" d="M21.205,5.007c-0.429-0.444-1.143-0.444-1.587,0c-0.429,0.429-0.429,1.143,0,1.571l8.047,8.047H1.111 C0.492,14.626,0,15.118,0,15.737c0,0.619,0.492,1.127,1.111,1.127h26.554l-8.047,8.032c-0.429,0.444-0.429,1.159,0,1.587 c0.444,0.444,1.159,0.444,1.587,0l9.952-9.952c0.444-0.429,0.444-1.143,0-1.571L21.205,5.007z"></path></svg>';
-    return (
-      (C.innerHTML = `<div>\n                        <div class="bft-edit-form-header" ${k}>\n                            ${I}\n                            <h1 class="bft-edit-form-title">${u}</h1>\n                            <div id="bft-avatar" class="bft-edit-form-avatar">${y}</div>                        \n                        </div>\n                        <div data-bft-edit-from-btns class="bft-edit-form-instruments">\n                        ${(function () {
-        if (a) return "";
-        var e = "";
-        for (var i in d) {
-          var r = d[i];
-          FamilyTree.isNEU(r) ||
-            (x && r.hideIfEditMode) ||
-            (t && r.hideIfDetailsMode) ||
-            (o && "Edit" == r.text) ||
-            (e += `<div data-edit-from-btn='${i}' class="bft-img-button" ${k} title="${r.text}">${r.icon}</div>`);
-        }
-        return e;
-      })()}    \n                        </div>\n                    </div>\n                    <div class="bft-edit-form-fields">\n                        <div class="bft-edit-form-fields-inner">\n                            <div class="bft-form-fieldset">\n                                ${(function () {
-        for (var e = "", i = 0; i < l.length; i++) {
-          var r = l[i];
-          if (Array.isArray(r)) {
-            e += '<div class="bft-form-field-100 bft-form-fieldset">';
-            for (var a = 0; a < r.length; a++) {
-              var o = r[a],
-                s = FamilyTree.elements[o.type](h, o, "unset", t);
-              !FamilyTree.isNEU(s.id) &&
-                FamilyTree.isNEU(n) &&
-                FamilyTree.isNEU(s.value) &&
-                (n = s.id),
-                FamilyTree.isNEU(s.value) || S.push(`${o.label}: ${s.value}`),
-                (e += s.html);
-            }
-            e += "</div>";
-          } else {
-            s = FamilyTree.elements[r.type](h, r, "280px", t);
-            !FamilyTree.isNEU(s.id) &&
-              FamilyTree.isNEU(n) &&
-              FamilyTree.isNEU(s.value) &&
-              (n = s.id),
-              FamilyTree.isNEU(s.value) || S.push(`${r.label}: ${s.value}`),
-              (e += s.html);
-          }
-        }
-        return e;
-      })()}\n\n                                <div class="bft-form-field" style="min-width: 280px; text-align:center; ${w}">\n                                    <a data-add-more-fields-btn href="#" class="bft-link">${s}</a>\n                                </div>\n                            </div>        \n                        </div>\n                    </div>\n                    <div class="bft-form-fieldset" style="padding: 14px 10px; ${_}">\n                        <div class="bft-form-field" style="min-width: initial;">\n                            <button data-edit-from-cancel type="button" class="bft-button transparent">Cancel</button>\n                        </div>\n                        <div class="bft-form-field" style="min-width: initial;">\n                            <button type="submit" data-edit-from-save type="button" class="bft-button">Save and close</button>\n                        </div>\n                    </div>`),
-      { element: C, focusId: n, title: u, shareText: S.join("\n") }
-    );
-  }),
-  (FamilyTree.editUI.prototype.hide = function () {
-    if (!1 === FamilyTree.events.publish("hide", [this])) return !1;
-    FamilyTree.isNEU(this.interval) &&
-      (clearInterval(this.interval), (this.interval = null));
-    var e = this.obj.element.querySelector("[data-bft-edit-form]");
-    e && e.parentNode && e.parentNode.removeChild(e);
-  }),
+      //     )
+      //       i = i.parentNode;
+      //     if (i && i.hasAttribute) {
+      //       var n = i.getAttribute("data-edit-from-btn"),
+      //         o = {
+      //           button: r.obj.config.editForm.buttons[n],
+      //           name: n,
+      //           nodeId: e,
+      //           event: t,
+      //         };
+      //       if (!1 === FamilyTree.events.publish("button-click", [r, o]))
+      //         return !1;
+      //       switch (n) {
+      //         case "edit":
+      //           r.obj.editUI.show(e, !1, !0);
+      //           break;
+      //         case "pdf":
+      //           r.obj.exportPDFProfile({ id: e, filename: a.title }), r.hide();
+      //           break;
+      //         case "png":
+      //           r.obj.exportPNGProfile({ id: e, filename: a.title }), r.hide();
+      //           break;
+      //         case "share":
+      //           r.obj.shareProfile(e);
+      //           break;
+      //         case "remove":
+      //           r.obj.removeNode(e, null, !0), r.hide();
+      //       }
+      //     }
+      //   });
+  // // }),
+  // (FamilyTree.editUI.ficusElement = function (e) {
+  //   if (!FamilyTree.isNEU(e)) {
+  //     var t = document.getElementById(e);
+  //     t &&
+  //       (t.focus(),
+  //       t.value &&
+  //         t.value.length &&
+  //         (t.selectionStart = t.selectionEnd = t.value.length));
+  //   }
+  // }),
+  // (FamilyTree.editUI.prototype.setAvatar = function (e) {
+  //   var t = this.obj.element.querySelector("#bft-avatar");
+  //   FamilyTree.isNEU(e)
+  //     ? (t.innerHTML = FamilyTree.icon.user(150, 150, "#8C8C8C", 0, 0))
+  //     : (t.innerHTML = `<img style="width: 100%;height:100%;border-radius: 50%;" src="${e}"></img>`);
+  // }),
+  // (FamilyTree.editUI.prototype.content = function (e, t, i, r, a) {
+  //   var n,
+  //     o = this.obj.config.editForm.readOnly,
+  //     l = JSON.parse(JSON.stringify(this.obj.config.editForm.elements)),
+  //     s = this.obj.config.editForm.addMore,
+  //     d = this.obj.config.editForm.buttons,
+  //     c = this.obj.config.editForm.titleBinding,
+  //     m = this.obj.config.editForm.photoBinding,
+  //     p = this.obj.getNode(e),
+  //     h = this.obj._get(e),
+  //     f = FamilyTree.t(p.templateName, p.min, this.obj.getScale()),
+  //     u = h[c],
+  //     y = h[m];
+  //   if (this.obj.config.editForm.generateElementsFromFields)
+  //     for (var g = 0; g < this.fields.length; g++) {
+  //       var b = this.fields[g];
+  //       if ("tags" != b) {
+  //         for (var T = !1, v = 0; v < l.length; v++) {
+  //           if (Array.isArray(l[v])) {
+  //             for (var F = 0; F < l[v].length; F++)
+  //               if (b == l[v][F].binding) {
+  //                 T = !0;
+  //                 break;
+  //               }
+  //           } else if (b == l[v].binding) {
+  //             T = !0;
+  //             break;
+  //           }
+  //           if (T) break;
+  //         }
+  //         T || l.push({ type: "textbox", label: b, binding: b });
+  //       }
+  //     }
+    // FamilyTree.isNEU(u) && (u = ""),
+    //   (y = FamilyTree.isNEU(y)
+    //     ? FamilyTree.icon.user(150, 150, "#8C8C8C", 0, 0)
+    //     : `<img style="width: 100%;height:100%;border-radius: 50%;" src="${y}"></img>`);
+    // var x = !t,
+    //   _ = t ? "display:none;" : "",
+    //   w = t || !s ? "display:none;" : "",
+    //   k = f.editFormHeaderColor
+    //     ? `style="background-color:${f.editFormHeaderColor};"`
+    //     : "",
+    //   C = document.createElement("form");
+    // if (
+    //   (C.setAttribute("data-bft-edit-form", ""),
+    //   C.classList.add("bft-edit-form"),
+    //   C.classList.add(this.obj.config.mode),
+    //   C.classList.add(p.templateName),
+    //   C.classList.add(FamilyTree.ui._defsIds[p.templateName]),
+    //   Array.isArray(p.tags) && p.tags.length)
+    // )
+    //   for (g = 0; g < p.tags.length; g++) C.classList.add(p.tags[g]);
+    // (C.style.display = "flex"),
+    //   (C.style.opacity = i ? 1 : 0),
+    //   (C.style.right = i ? 0 : "-20px"),
+    //   r && (C.style.width = r);
+  //   var S = [],
+  //     I = a
+  //       ? ""
+  //       : '<svg data-edit-from-close class="bft-edit-form-close"><path style="fill:#ffffff;" d="M21.205,5.007c-0.429-0.444-1.143-0.444-1.587,0c-0.429,0.429-0.429,1.143,0,1.571l8.047,8.047H1.111 C0.492,14.626,0,15.118,0,15.737c0,0.619,0.492,1.127,1.111,1.127h26.554l-8.047,8.032c-0.429,0.444-0.429,1.159,0,1.587 c0.444,0.444,1.159,0.444,1.587,0l9.952-9.952c0.444-0.429,0.444-1.143,0-1.571L21.205,5.007z"></path></svg>';
+  //   return (
+  //     (C.innerHTML = `<div>\n                        <div class="bft-edit-form-header" ${k}>\n                            ${I}\n                            <h1 class="bft-edit-form-title">${u}</h1>\n                            <div id="bft-avatar" class="bft-edit-form-avatar">${y}</div>                        \n                        </div>\n                        <div data-bft-edit-from-btns class="bft-edit-form-instruments">\n                        ${(function () {
+  //       if (a) return "";
+  //       var e = "";
+  //       for (var i in d) {
+  //         var r = d[i];
+  //         FamilyTree.isNEU(r) ||
+  //           (x && r.hideIfEditMode) ||
+  //           (t && r.hideIfDetailsMode) ||
+  //           (o && "Edit" == r.text) ||
+  //           (e += `<div data-edit-from-btn='${i}' class="bft-img-button" ${k} title="${r.text}">${r.icon}</div>`);
+  //       }
+  //       return e;
+  //     })()}    \n                        </div>\n                    </div>\n                    <div class="bft-edit-form-fields">\n                        <div class="bft-edit-form-fields-inner">\n                            <div class="bft-form-fieldset">\n                                ${(function () {
+  //       for (var e = "", i = 0; i < l.length; i++) {
+  //         var r = l[i];
+  //         if (Array.isArray(r)) {
+  //           e += '<div class="bft-form-field-100 bft-form-fieldset">';
+  //           for (var a = 0; a < r.length; a++) {
+  //             var o = r[a],
+  //               s = FamilyTree.elements[o.type](h, o, "unset", t);
+  //             !FamilyTree.isNEU(s.id) &&
+  //               FamilyTree.isNEU(n) &&
+  //               FamilyTree.isNEU(s.value) &&
+  //               (n = s.id),
+  //               FamilyTree.isNEU(s.value) || S.push(`${o.label}: ${s.value}`),
+  //               (e += s.html);
+  //           }
+  //           e += "</div>";
+  //         } else {
+  //           s = FamilyTree.elements[r.type](h, r, "280px", t);
+  //           !FamilyTree.isNEU(s.id) &&
+  //             FamilyTree.isNEU(n) &&
+  //             FamilyTree.isNEU(s.value) &&
+  //             (n = s.id),
+  //             FamilyTree.isNEU(s.value) || S.push(`${r.label}: ${s.value}`),
+  //             (e += s.html);
+  //         }
+  //       }
+  //       return e;
+  //     })()}\n\n                                <div class="bft-form-field" style="min-width: 280px; text-align:center; ${w}">\n                                    <a data-add-more-fields-btn href="#" class="bft-link">${s}</a>\n                                </div>\n                            </div>        \n                        </div>\n                    </div>\n                    <div class="bft-form-fieldset" style="padding: 14px 10px; ${_}">\n                        <div class="bft-form-field" style="min-width: initial;">\n                            <button data-edit-from-cancel type="button" class="bft-button transparent">Cancel</button>\n                        </div>\n                        <div class="bft-form-field" style="min-width: initial;">\n                            <button type="submit" data-edit-from-save type="button" class="bft-button">Save and close</button>\n                        </div>\n                    </div>`),
+  //     { element: C, focusId: n, title: u, shareText: S.join("\n") }
+  //   );
+  // }),
+  // (FamilyTree.editUI.prototype.hide = function () {
+  //   if (!1 === FamilyTree.events.publish("hide", [this])) return !1;
+  //   FamilyTree.isNEU(this.interval) &&
+  //     (clearInterval(this.interval), (this.interval = null));
+  //   var e = this.obj.element.querySelector("[data-bft-edit-form]");
+  //   e && e.parentNode && e.parentNode.removeChild(e);
+  // }),
   (FamilyTree.prototype.getSvg = function () {
     var e = this.element.getElementsByTagName("svg");
     return e && e.length ? e[0] : null;
@@ -2112,10 +2112,10 @@ var FamilyTree = function (e, t) {
               n.obj.addNode(l, null, !0);
             } else if ("edit" === o) {
               var s = n.obj.getNode(i);
-              n.obj.editUI.show(s.id);
+              // n.obj.editUI.show(s.id);
             } else if ("details" === o) {
               s = n.obj.getNode(i);
-              n.obj.editUI.show(s.id, !0);
+              // n.obj.editUI.show(s.id, !0);
             } else
               "remove" === o
                 ? n.obj.removeNode(i, null, !0)
@@ -3842,20 +3842,20 @@ var FamilyTree = function (e, t) {
     (e = this._defaultExportProfileOptions(e, "png")),
       this._exportProfile(e, t);
   }),
-  (FamilyTree.prototype.shareProfile = function (e) {
-    var t;
-    "object" == typeof e
-      ? (e = (t = e).focusId)
-      : (t = this.editUI.content(e, !0, !0, "100%", !0));
-    var i = new URL(window.location.href);
-    i.searchParams.append("nodeId", e);
-    var r = { title: t.title, text: t.shareText, url: i.href };
-    try {
-      navigator.share(r);
-    } catch (e) {
-      console.error("error: " + e);
-    }
-  }),
+  // (FamilyTree.prototype.shareProfile = function (e) {
+  //   var t;
+  //   "object" == typeof e
+  //     ? (e = (t = e).focusId)
+  //     : (t = this.editUI.content(e, !0, !0, "100%", !0));
+  //   var i = new URL(window.location.href);
+  //   i.searchParams.append("nodeId", e);
+  //   var r = { title: t.title, text: t.shareText, url: i.href };
+  //   try {
+  //     navigator.share(r);
+  //   } catch (e) {
+  //     console.error("error: " + e);
+  //   }
+  // }),
   (FamilyTree.prototype.exportPDF = function (e, t) {
     (e = this._defaultExportOptions(e, "pdf")), this._export(e, t);
   }),
@@ -4704,24 +4704,24 @@ var FamilyTree = function (e, t) {
       }
       if (l.hasAttribute(FamilyTree.attr.node_id)) {
         (s = l.getAttribute(FamilyTree.attr.node_id)), (d = this.getNode(s));
-        return void this._nodeClickHandler(d.id, t);
+        // return void this._nodeClickHandler(d.id, t);
       }
       if (l.hasAttribute(FamilyTree.attr.control_node_menu_id)) {
         t.stopPropagation(), t.preventDefault();
         (s = l.getAttribute(FamilyTree.attr.control_node_menu_id)),
           (d = this.getNode(s));
-        return void this._nodeMenuClickHandler(d.id, l, t);
+        // return void this._nodeMenuClickHandler(d.id, l, t);
       }
       if (l.hasAttribute(FamilyTree.attr.control_node_circle_menu_id)) {
         t.stopPropagation(), t.preventDefault();
         s = l.getAttribute(FamilyTree.attr.control_node_circle_menu_id);
-        return void this._nodeCircleMenuClickHandler(s);
+        // return void this._nodeCircleMenuClickHandler(s);
       }
       if (l.hasAttribute(FamilyTree.attr.control_node_circle_menu_name))
         return (
           t.stopPropagation(),
-          t.preventDefault(),
-          void this._nodeCircleMenuItemClickHandler(l, t)
+          t.preventDefault()
+          // void this._nodeCircleMenuItemClickHandler(l, t)
         );
       if (l.hasAttribute(FamilyTree.attr.control_add))
         return void this._lonelyButtonHandler();
@@ -5209,95 +5209,95 @@ var FamilyTree = function (e, t) {
         this._draw(!1, FamilyTree.action.resize);
     }
   }),
-  (FamilyTree.prototype._nodeDbClickHandler = function (e, t) {
-    if (!1 === FamilyTree.events.publish("dbclick", [this, this.get(e)]))
-      return !1;
-    this._commonClickHandler(e, t, this.config.nodeMouseDbClick);
-  }),
-  (FamilyTree.prototype._nodeClickHandler = function (e, t) {
-    var i = this.getNodeElement(e);
-    if (i && i._dragEventFired) i._dragEventFired = !1;
-    else {
-      if (
-        !1 ===
-        FamilyTree.events.publish("click", [
-          this,
-          { node: this.getNode(e), event: t },
-        ])
-      )
-        return !1;
-      this._commonClickHandler(e, t, this.config.nodeMouseClick);
-    }
-  }),
-  (FamilyTree.prototype._nodeCircleMenuItemClickHandler = function (e, t) {
-    var i = e.parentNode.getAttribute(
-        FamilyTree.attr.control_node_circle_menu_wrraper_id
-      ),
-      r = e.getAttribute(FamilyTree.attr.control_node_circle_menu_name),
-      a = this.nodeCircleMenuUI._menu[r];
-    FamilyTree.events.publish("click", [
-      this.nodeCircleMenuUI,
-      { nodeId: i, menuItemName: r, menuItem: a, event: t },
-    ]);
-  }),
-  (FamilyTree.prototype._nodeCircleMenuClickHandler = function (e) {
-    this.searchUI.hide(),
-      this.nodeMenuUI.hide(),
-      this.nodeContextMenuUI.hide(),
-      this.menuUI.hide();
-    var t = this.getNode(e),
-      i = null;
-    if (Array.isArray(t.tags))
-      for (var r = 0; r < t.tags.length; r++) {
-        var a = t.tags[r];
-        this.config.tags[a] &&
-          this.config.tags[a].nodeCircleMenu &&
-          (i = this.config.tags[a].nodeCircleMenu);
-      }
-    this.nodeCircleMenuUI.show(e, i);
-  }),
-  (FamilyTree.prototype._commonClickHandler = function (e, t, i) {
-    var r;
-    (this.searchUI.hide(),
-    this.nodeMenuUI.hide(),
-    this.nodeContextMenuUI.hide(),
-    this.menuUI.hide(),
-    this.nodeCircleMenuUI.hide(),
-    i == FamilyTree.action.expandCollapse && this.toggleExpandCollapse(e, t),
-    i == FamilyTree.action.edit) &&
-      (r = this.getNode(e)) &&
-      (this.editUI.show(r.id), this.ripple(r.id, t.clientX, t.clientY));
-    i == FamilyTree.action.details &&
-      (r = this.getNode(e)) &&
-      (this.editUI.show(r.id, !0), this.ripple(r.id, t.clientX, t.clientY));
-  }),
-  (FamilyTree.prototype._menuHandlerMouseDownHandler = function (e, t) {
-    t.stopPropagation(), t.preventDefault();
-  }),
-  (FamilyTree.prototype._nodeMenuClickHandler = function (e, t, i) {
-    this.searchUI.hide(),
-      this.nodeMenuUI.hide(),
-      this.nodeContextMenuUI.hide(),
-      this.menuUI.hide(),
-      this.nodeCircleMenuUI.hide();
-    var r = this.getNode(e),
-      a = null;
-    if (Array.isArray(r.tags))
-      for (var n = 0; n < r.tags.length; n++) {
-        var o = r.tags[n];
-        this.config.tags[o] &&
-          this.config.tags[o].nodeMenu &&
-          (a = this.config.tags[o].nodeMenu);
-      }
-    this.nodeMenuUI.showStickIn(t, e, null, a);
-  }),
-  (FamilyTree.prototype._menuClickHandler = function (e, t) {
-    t.stopPropagation(),
-      t.preventDefault(),
-      this.nodeMenuUI.hide(),
-      this.nodeContextMenuUI.hide(),
-      this.menuUI.show(e.offsetLeft, e.offsetTop);
-  }),
+  // (FamilyTree.prototype._nodeDbClickHandler = function (e, t) {
+  //   if (!1 === FamilyTree.events.publish("dbclick", [this, this.get(e)]))
+  //     return !1;
+  //   this._commonClickHandler(e, t, this.config.nodeMouseDbClick);
+  // }),
+  // (FamilyTree.prototype._nodeClickHandler = function (e, t) {
+  //   var i = this.getNodeElement(e);
+  //   if (i && i._dragEventFired) i._dragEventFired = !1;
+  //   else {
+  //     if (
+  //       !1 ===
+  //       FamilyTree.events.publish("click", [
+  //         this,
+  //         { node: this.getNode(e), event: t },
+  //       ])
+  //     )
+  //       return !1;
+  //     this._commonClickHandler(e, t, this.config.nodeMouseClick);
+  //   }
+  // }),
+  // (FamilyTree.prototype._nodeCircleMenuItemClickHandler = function (e, t) {
+  //   var i = e.parentNode.getAttribute(
+  //       FamilyTree.attr.control_node_circle_menu_wrraper_id
+  //     ),
+  //     r = e.getAttribute(FamilyTree.attr.control_node_circle_menu_name),
+  //     a = this.nodeCircleMenuUI._menu[r];
+  //   FamilyTree.events.publish("click", [
+  //     this.nodeCircleMenuUI,
+  //     { nodeId: i, menuItemName: r, menuItem: a, event: t },
+  //   ]);
+  // }),
+  // (FamilyTree.prototype._nodeCircleMenuClickHandler = function (e) {
+  //   this.searchUI.hide(),
+  //     this.nodeMenuUI.hide(),
+  //     this.nodeContextMenuUI.hide(),
+  //     this.menuUI.hide();
+  //   var t = this.getNode(e),
+  //     i = null;
+  //   if (Array.isArray(t.tags))
+  //     for (var r = 0; r < t.tags.length; r++) {
+  //       var a = t.tags[r];
+  //       this.config.tags[a] &&
+  //         this.config.tags[a].nodeCircleMenu &&
+  //         (i = this.config.tags[a].nodeCircleMenu);
+  //     }
+  //   this.nodeCircleMenuUI.show(e, i);
+  // }),
+  // (FamilyTree.prototype._commonClickHandler = function (e, t, i) {
+  //   var r;
+  //   (this.searchUI.hide(),
+  //   this.nodeMenuUI.hide(),
+  //   this.nodeContextMenuUI.hide(),
+  //   this.menuUI.hide(),
+  //   this.nodeCircleMenuUI.hide(),
+  //   i == FamilyTree.action.expandCollapse && this.toggleExpandCollapse(e, t),
+  //   i == FamilyTree.action.edit) &&
+  //     (r = this.getNode(e)) &&
+  //     (this.editUI.show(r.id), this.ripple(r.id, t.clientX, t.clientY));
+  //   i == FamilyTree.action.details &&
+  //     (r = this.getNode(e)) &&
+  //     (this.editUI.show(r.id, !0), this.ripple(r.id, t.clientX, t.clientY));
+  // }),
+  // (FamilyTree.prototype._menuHandlerMouseDownHandler = function (e, t) {
+  //   t.stopPropagation(), t.preventDefault();
+  // }),
+  // (FamilyTree.prototype._nodeMenuClickHandler = function (e, t, i) {
+  //   this.searchUI.hide(),
+  //     this.nodeMenuUI.hide(),
+  //     this.nodeContextMenuUI.hide(),
+  //     this.menuUI.hide(),
+  //     this.nodeCircleMenuUI.hide();
+  //   var r = this.getNode(e),
+  //     a = null;
+  //   if (Array.isArray(r.tags))
+  //     for (var n = 0; n < r.tags.length; n++) {
+  //       var o = r.tags[n];
+  //       this.config.tags[o] &&
+  //         this.config.tags[o].nodeMenu &&
+  //         (a = this.config.tags[o].nodeMenu);
+  //     }
+  //   this.nodeMenuUI.showStickIn(t, e, null, a);
+  // }),
+  // (FamilyTree.prototype._menuClickHandler = function (e, t) {
+  //   t.stopPropagation(),
+  //     t.preventDefault(),
+  //     this.nodeMenuUI.hide(),
+  //     this.nodeContextMenuUI.hide(),
+  //     this.menuUI.show(e.offsetLeft, e.offsetTop);
+  // }),
   (FamilyTree.prototype._lonelyButtonHandler = function () {
     var e = { id: this.generateId() };
     !1 !== this.addNode(e, null, !0) && this.center(e.id);
@@ -7189,16 +7189,16 @@ var FamilyTree = function (e, t) {
     pointer:
       '<g data-pointer="pointer" transform="matrix(0,0,0,0,100,100)"><radialGradient id="pointerGradient"><stop stop-color="#ffffff" offset="0" /><stop stop-color="#C1C1C1" offset="1" /></radialGradient><circle cx="16" cy="16" r="16" stroke-width="1" stroke="#acacac" fill="url(#pointerGradient)"></circle></g>',
     node: '<rect x="0" y="0" height="{h}" width="{w}" stroke-width="1" stroke="#000000" rx="7" ry="7"></rect>',
-    // menuButton:
-    //   '<div style="position:absolute;right:{p}px;top:{p}px; width:40px;height:50px;cursor:pointer;" ' +
-    //   FamilyTree.attr.control_export_menu +
-    //   '=""><hr style="background-color: #7A7A7A; height: 3px; border: none;"><hr style="background-color: #7A7A7A; height: 3px; border: none;"><hr style="background-color: #7A7A7A; height: 3px; border: none;"></div>',
+    menuButton:
+      '<div style="position:absolute;right:{p}px;top:{p}px; width:40px;height:50px;cursor:pointer;" ' +
+      FamilyTree.attr.control_export_menu +
+      '=""><hr style="background-color: #7A7A7A; height: 3px; border: none;"><hr style="background-color: #7A7A7A; height: 3px; border: none;"><hr style="background-color: #7A7A7A; height: 3px; border: none;"></div>',
     padding: [50, 20, 35, 20],
-    // nodeMenuButton: `<use ${FamilyTree.attr.control_node_menu_id}="{id}" x="220" y="95" xlink:href="#base_node_menu"/>`,
-    // nodeTreeMenuButton:
-    //   '<use data-ctrl-n-t-menu-id="{id}" x="10" y="10" xlink:href="#base_tree_menu"/>',
-    // nodeTreeMenuCloseButton:
-    //   '<use data-ctrl-n-t-menu-c="" x="10" y="10" xlink:href="#base_tree_menu_close"/>',
+    nodeMenuButton: `<use ${FamilyTree.attr.control_node_menu_id}="{id}" x="220" y="95" xlink:href="#base_node_menu"/>`,
+    nodeTreeMenuButton:
+      '<use data-ctrl-n-t-menu-id="{id}" x="10" y="10" xlink:href="#base_tree_menu"/>',
+    nodeTreeMenuCloseButton:
+      '<use data-ctrl-n-t-menu-c="" x="10" y="10" xlink:href="#base_tree_menu_close"/>',
     up: '<use x="110" y="-10" xlink:href="#base_up"/>',
     img_0:
       '{val}',

@@ -36,14 +36,14 @@ const family = new FamilyTree(document.getElementById("tree"), {
     mouseScroll: FamilyTree.action.none,
     scaleInitial: FamilyTree.match.boundary,
     enableSearch: false,
+    editForm: {},
     nodeBinding: {
         field_0: "gender",
         field_1: "genotype",
         field_2: "affected",
         field_3: "carrier",
         field_4: "generation",
-        img_0: "img",
-        field_5: "html"
+        img_0: "img"
     },
     nodes: []
 });
