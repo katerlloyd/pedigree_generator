@@ -1,3 +1,1 @@
 # Pedigree Project
-
-## Ideas
