@@ -63,7 +63,7 @@ button {
     font-weight: bold;
 }
 
-button:hover {
+button:hover, button:focus {
     color: var(--main-color);
     background-color: var(--light-color);
     cursor: pointer;

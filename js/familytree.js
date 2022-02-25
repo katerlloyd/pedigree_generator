@@ -7274,6 +7274,8 @@ var FamilyTree = function (e, t) {
     "<text " +
     FamilyTree.attr.width +
     '="150" style="font-size: 12px;" fill="#000000" x="16" y="65" text-anchor="start">{val}</text>'),
+  // (FamilyTree.templates.tommy.field_2 = 
+  //   '<rect x="0" y="0" height="50" width="50" stroke-width="2" fill="#0000000" stroke="#000000" rx="7" ry="7"></rect>'),
   (FamilyTree.templates.tommy.node =
     '<rect x="0" y="0" height="{h}" width="{w}" stroke-width="2" fill="#000000" stroke="#000000" rx="7" ry="7"></rect>'),
   (FamilyTree.templates.tommy_male = Object.assign(
@@ -7282,12 +7284,16 @@ var FamilyTree = function (e, t) {
   )),
   (FamilyTree.templates.tommy_male.node =
     '<rect x="0" y="0" height="{h}" width="{w}" stroke-width="2" fill="#ffffff" stroke="#000000" rx="7" ry="7"></rect>'),
+  // (FamilyTree.templates.tommy_male.field_2 = 
+  //     '<rect x="0" y="0" height="50" width="50" stroke-width="2" fill="#0000000" stroke="#000000" rx="7" ry="7"></rect>'),
   (FamilyTree.templates.tommy_female = Object.assign(
     {},
     FamilyTree.templates.tommy
   )),
   (FamilyTree.templates.tommy_female.node =
-    '<rect x="0" y="0" height="{h}" width="{w}" stroke-width="2" fill="#ffffff" stroke="#000000" rx="100" ry="100"></rect>'),
+    '<rect x="0" y="0" height="50" width="50" stroke-width="2" fill="#ffffff" stroke="#000000" rx="100" ry="100"></rect>'),
+  // (FamilyTree.templates.tommy_female.field_2 = 
+  //   '<rect x="0" y="0" height="50" width="50" stroke-width="2" fill="#000000" stroke="#000000" rx="100" ry="100"></rect>'),
 //   (FamilyTree.templates.hugo = Object.assign({}, FamilyTree.templates.base)),
 //   (FamilyTree.templates.hugo.up =
 //     '<use x="200" y="10" xlink:href="#hugo_up"/>'),
