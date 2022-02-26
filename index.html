@@ -38,31 +38,36 @@
             </ul>
 
             <p>Please select the genotypes of the first two individuals: </p>
-            <p>Male</p>
-            <ul>
-                <li>AA</li>
-                <li>Aa</li>
-                <li>aa</li>
-            </ul>
-            <ul>
-                <li>X<sup>A</sup>Y</li>
-                <li>X<sup>a</sup>Y</li>
-                <li>Y-Linked (doesn't matter)</li>
-            </ul>
+            <div class="genotype-container">
+                <div class="male-genotype-selection">
+                    <p>Male</p>
+                    <ul>
+                        <li>AA</li>
+                        <li>Aa</li>
+                        <li>aa</li>
+                    </ul>
+                    <ul>
+                        <li>X<sup>A</sup>Y</li>
+                        <li>X<sup>a</sup>Y</li>
+                        <li>Y-Linked</li>
+                    </ul>
+                </div>
+                <div class="female-genotype-selection">
+                    <p>Female</p>
+                    <ul>
+                        <li>AA</li>
+                        <li>Aa</li>
+                        <li>aa</li>
+                    </ul>
+                    <ul>
+                        <li>X<sup>A</sup>X<sup>A</sup></li>
+                        <li>X<sup>A</sup>X<sup>a</sup></li>
+                        <li>X<sup>a</sup>X<sup>a</sup></li>
+                        <li>Y-Linked</li>
+                    </ul>
+                </div>
+            </div>
             
-            <p>Female</p>
-            <ul>
-                <li>AA</li>
-                <li>Aa</li>
-                <li>aa</li>
-            </ul>
-            <ul>
-                <li>X<sup>A</sup>X<sup>A</sup></li>
-                <li>X<sup>A</sup>X<sup>a</sup></li>
-                <li>X<sup>a</sup>X<sup>a</sup></li>
-                <li>Y-Linked (doesn't matter)</li>
-            </ul>
-
             <div class="children">
                 <p>How many children would you like them to have? </p>
                 <select name="children" id="children">
@@ -105,34 +110,35 @@
 
             <div class="legend">
                 <div class="content">
-                    <svg height="60" width="60">
-                        <rect x="5" y="5" height="50" width="50" stroke-width="2" fill="#ffffff" stroke="#000000" rx="7" ry="7"></rect>
+                    <svg height="50" width="50">
+                        <rect x="5" y="5" height="40" width="40" stroke-width="2" fill="#ffffff" stroke="#000000" rx="7" ry="7"></rect>
                     </svg>
                     <p>Male</p>
                 </div>
                 <div class="content">
-                    <svg height="60" width="60">
-                        <rect x="5" y="5" height="50" width="50" stroke-width="2" fill="#ffffff" stroke="#000000" rx="100" ry="100"></rect>
+                    <svg height="50" width="50">
+                        <rect x="5" y="5" height="40" width="40" stroke-width="2" fill="#ffffff" stroke="#000000" rx="100" ry="100"></rect>
                     </svg>
                     <p>Female</p>
                 </div>
             </div>
             <div class="legend">
                 <div class="content">
-                    <svg height="60" width="60">
-                        <rect x="5" y="5" height="50" width="50" stroke-width="2" fill="#0000000" stroke="#000000" rx="100" ry="100"></rect>
+                    <svg height="50" width="50">
+                        <rect x="5" y="5" height="40" width="40" stroke-width="2" fill="#000000" stroke="#000000" rx="100" ry="100"></rect>
                     </svg>
                     <p>Affected</p>
                 </div>
                 <div class="content">
-                    <svg height="60" width="60">
-                        <rect x="5" y="5" height="50" width="50" stroke-width="2" fill="#ffffff" stroke="#000000" rx="100" ry="100"></rect><rect x="25" y="25" height="10" width="10" stroke-width="2" fill="#000000" stroke="#000000" rx="100" ry="100"></rect>
+                    <svg height="50" width="50">
+                        <rect x="5" y="5" height="40" width="40" stroke-width="2" fill="#ffffff" stroke="#000000" rx="100" ry="100"></rect>
+                        <rect x="20" y="20" height="10" width="10" stroke-width="2" fill="#000000" stroke="#000000" rx="100" ry="100"></rect>
                     </svg>
                     <p>Carrier</p>
                 </div>
                 <div class="content">
-                    <svg height="60" width="60">
-                        <rect x="5" y="5" height="50" width="50" stroke-width="2" fill="#ffffff" stroke="#000000" rx="100" ry="100"></rect>
+                    <svg height="50" width="50">
+                        <rect x="5" y="5" height="40" width="40" stroke-width="2" fill="#ffffff" stroke="#000000" rx="100" ry="100"></rect>
                     </svg>
                     <p>Unaffected</p>
                 </div>
@@ -147,7 +153,7 @@
             <button type="button" id="download-pedigree">Download Pedigree</button>
         </main>
         <footer>
-            <p>&#169; <span id="copyright-year"></span> <strong>Pedigree Chart Generator</strong> - Created by Kate Clark</p>
+            <p>&#169; <span id="copyright-year"></span> Pedigree Chart Generator - Created by Kate Clark</p>
         </footer>
     </body>
 </html>

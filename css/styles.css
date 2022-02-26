@@ -28,7 +28,7 @@ header, footer {
     background-image: linear-gradient(to right, #33460f, var(--main-color), #33460f);
 }
 
-h1, strong {
+h1 {
     color: var(--highlight-color);
     letter-spacing: 0.1rem;
 }
@@ -40,7 +40,7 @@ select {
     background-color: var(--highlight-color);
     color: var(--main-color);
     outline: 2px solid var(--main-color);
-    border-radius: 15px;
+    border-radius: 7px;
 }
 
 select:focus {
@@ -62,7 +62,7 @@ select:hover {
     display: flex;
     padding: 1rem;
     border: 3px solid var(--main-color);
-    border-radius: 15px;
+    border-radius: 7px;
     background-color: var(--highlight-color);
 } */
 
@@ -80,7 +80,7 @@ button {
     padding: 1rem;
     margin: 1rem 0;
     border: 3px solid var(--main-color);
-    border-radius: 15px;
+    border-radius: 7px;
     background-color: var(--main-color);
     font-size: 16pt;
     font-weight: bold;
@@ -111,12 +111,17 @@ footer {
     border-top: 4px solid #c9dd8e;
 }
 
-.legend {
+.genotype-container {
     display: flex;
     flex-wrap: wrap;
-    padding: 0.5rem;
+}
+
+.legend, .male-genotype-selection, .female-genotype-selection {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0.25rem;
     border: 2px solid #000000;
-    border-radius: 5px;
+    border-radius: 7px;
     max-width: fit-content;
     margin: 1rem 0;
     background-color: #f8f8f8;
@@ -131,5 +136,6 @@ footer {
 }
 
 .legend p {
-    padding: 0.35rem 1rem 0 0;
+    /* padding: 0.35rem 1rem 0 0; */
+    margin: 1rem 1rem 0 0;
 }

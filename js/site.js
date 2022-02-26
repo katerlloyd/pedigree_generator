@@ -13,12 +13,12 @@
 // let inheritanceType = 'Autosomal Dominant';
 // let inheritanceType = 'Autosomal Recessive';
 // let inheritanceType = 'X-Linked Dominant';
-// let inheritanceType = 'X-Linked Recessive';
-let inheritanceType = 'Y-Linked';
+let inheritanceType = 'X-Linked Recessive';
+// let inheritanceType = 'Y-Linked';
 
 let selectGen = document.querySelector('select#gen');
 
-for (let i = 2; i < 5; i++) {
+for (let i = 3; i < 6; i++) {
     let option = document.createElement('option');
     option.setAttribute('value', `${i}`);
     option.textContent = i;
@@ -222,8 +222,8 @@ const renderType = (index) => {
     }
 }
 
-// const setNumberofChildren = () => Math.floor(Math.random() * 5);
-const setNumberofChildren = () => Math.ceil(Math.random() * 3);
+const setNumberofChildren = () => Math.floor(Math.random() * 5);
+// const setNumberofChildren = () => Math.ceil(Math.random() * 3);
 
 const getOppositeGender = (index) => {
     if (getGender(index) === 'male') {
@@ -303,8 +303,8 @@ const createChildren = (mid, fid, numberOfChildren, currentGeneration) => {
 }
 
 const createFirstGeneration = () => {
-    // let maleGenotype = 'AA';
-    // let femaleGenotype = 'AA';
+    // let maleGenotype = 'Aa';
+    // let femaleGenotype = 'Aa';
     let maleGenotype = 'XAY';
     let femaleGenotype = 'XAXa';
 
@@ -320,7 +320,7 @@ const createFirstGeneration = () => {
     setCarrier(1);
     renderType(1);
 
-    createChildren(1, 0, 4, getGeneration(0));
+    createChildren(1, 0, 5, getGeneration(0));
 }
 
 createFirstGeneration();
