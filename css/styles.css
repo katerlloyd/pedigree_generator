@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@200&family=Poppins:wght@300&family=Roboto:wght@100&display=swap');
+
 :root {
     --main-color: #51680e;
     --highlight-color: #c9dd8e;
@@ -5,9 +7,30 @@
 }
 
 body {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-size: 14pt;
-    margin: 0 5%;
+    margin: 0;
+}
+
+main, header {
+    padding: 1rem;
+}
+
+main {
+    background-image: linear-gradient(to top, #ffffff 98%, #b4b4b4);
+}
+
+header {
+    border-bottom: 4px solid #c9dd8e;
+}
+
+header, footer {
+    background-image: linear-gradient(to right, #33460f, var(--main-color), #33460f);
+}
+
+h1, strong {
+    color: var(--highlight-color);
+    letter-spacing: 0.1rem;
 }
 
 select {
@@ -82,4 +105,31 @@ canvas {
 
 footer {
     text-align: center;
+    padding: 0.5rem;
+    background-color: var(--main-color);
+    color: var(--light-color);
+    border-top: 4px solid #c9dd8e;
+}
+
+.legend {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0.5rem;
+    border: 2px solid #000000;
+    border-radius: 5px;
+    max-width: fit-content;
+    margin: 1rem 0;
+    background-color: #f8f8f8;
+}
+
+.content {
+    display: flex;
+}
+
+.legend svg {
+    padding: 0.25rem;    
+}
+
+.legend p {
+    padding: 0.35rem 1rem 0 0;
 }

@@ -13,8 +13,8 @@
 // let inheritanceType = 'Autosomal Dominant';
 // let inheritanceType = 'Autosomal Recessive';
 // let inheritanceType = 'X-Linked Dominant';
-let inheritanceType = 'X-Linked Recessive';
-// let inheritanceType = 'Y-Linked';
+// let inheritanceType = 'X-Linked Recessive';
+let inheritanceType = 'Y-Linked';
 
 let selectGen = document.querySelector('select#gen');
 
@@ -26,14 +26,8 @@ for (let i = 2; i < 5; i++) {
     selectGen.appendChild(option);
 };
 
-// FamilyTree.templates.tommy_female.field_5 =
-//     '<foreignobject class="node" x="10" y="10" width="200" height="100">{val}</foreignobject>';
-// FamilyTree.templates.tommy_male.field_5 =
-//     '<foreignobject class="node" x="10" y="10" width="200" height="100">{val}</foreignobject>';
-
-
 const family = new FamilyTree(document.getElementById("tree"), {
-    mouseScroll: FamilyTree.action.none,
+    mouseScroll: FamilyTree.action.scroll,
     scaleInitial: FamilyTree.match.boundary,
     enableSearch: false,
     editForm: {},
@@ -53,21 +47,9 @@ const getLastId = () => {
     return family.config.nodes[lastIndex].id;
 }
 
-// const setMid = (index) => {
-//     // if (getGender() === 'female') {
-//     family.config.nodes[index].mid = 1;
-//     // }
-// }
-
 const getMid = (index) => {
     return family.config.nodes[index].mid
 }
-
-// const setFid = (index) => {
-//     // if (getGender() === 'female') {
-//     family.config.nodes[index].fid = 2;
-//     // }
-// }
 
 const getFid = (index) => family.config.nodes[index].fid;
 
@@ -169,10 +151,22 @@ const setAffected = (index) => {
             }
             break;
         case 'Y-Linked':
-            if (getGenotype(index).includes('Y')) {
-                family.config.nodes[index].affected = true;
+            if (getGenotype(index).includes('Y') && getFid(index) !== null) {
+                if (getAffected(getFid(index)) === true) {
+                    family.config.nodes[index].affected = true;
+                }
+            } else if (getGenotype(index).includes('Y') && getFid(index) === null) {
+                let num = Math.ceil(Math.random() * 4);
+                if (num === 4) {
+                    family.config.nodes[index].affected = true;
+                } else {
+                    family.config.nodes[index].affected = false;
+                }
             } else {
                 family.config.nodes[index].affected = false;
+            }
+            if (index === 0) {
+                family.config.nodes[index].affected = true;
             }
             break;
         default:
@@ -231,49 +225,6 @@ const renderType = (index) => {
 // const setNumberofChildren = () => Math.floor(Math.random() * 5);
 const setNumberofChildren = () => Math.ceil(Math.random() * 3);
 
-// const getPids = (index) => family.config.nodes[index].pids[0];
-
-// const checkPids = (index) => {
-    // if (family.config.nodes[index].pids.length !== 0) {
-    //     family.config.nodes[getPids(index)].pids[0] = index;
-    // } else {
-    //     let pairId = getLastId() + 1;
-    //     family.config.nodes[index].pids[0] = pairId;
-    //     family.config.nodes[pairId].pids[0] = index;
-    // }
-    // if (family.config.nodes[index].pids[0] === undefined) {
-    //     family.config.nodes.forEach(person => {
-    //         if (person.pids[0] === index) {
-    //             family.config.nodes[index].pids[0] = person.id;
-    //             return;
-    //         }
-    //     });
-
-    //     let pairId = getLastId() + 1;
-    //     family.config.nodes[index].pids[0] = pairId;
-    //     createIndividual(null, null);
-    // }
-
-    // let num = Math.floor(Math.random() * 2);
-
-    // if (num === 2) {
-    // let numberOfChildren = setNumberofChildren();
-    // createIndividual(null, null);
-    // if (getGender(index) === "female") {
-    //     let mid = index;
-    //     let fid = pairIndex;
-    // } else {
-    //     let mid = pairIndex;
-    //     let fid = index;
-    // }
-    // createChildren(mid, fid);
-    // family.config.nodes[index].pids = [pairIndex];
-    // family.config.nodes[pairIndex].pids = [index];
-    // } else {
-    //     family.config.nodes[index].pids = [];
-    // }
-// }
-
 const getOppositeGender = (index) => {
     if (getGender(index) === 'male') {
         return 'female';
@@ -291,6 +242,13 @@ const createPair = (index, generation) => {
         setGender(pairId);
     }
 
+    // let probability = Math.ceil(Math.random() * 2);
+    // if (inheritanceType === 'Y-Linked' && getGender(pairId) === "male" && probability === 2) {
+    //     family.config.nodes[pairId].affected = true;
+    // } else {
+    //     setAffected(pairId);
+    // }
+
     setAffected(pairId);
     setCarrier(pairId);
     renderType(pairId);
@@ -307,11 +265,6 @@ const createPair = (index, generation) => {
     }
 
     let numberOfChildren = setNumberofChildren();
-    // let num = Math.ceil(Math.random() * 4);
-
-    // if (generation !== maxGenerations -1 && num === 4) {
-    //     numberOfChildren = 0;
-    // }
 
     createChildren(mid, fid, numberOfChildren, generation);
 }
@@ -336,7 +289,7 @@ const createIndividual = (mid, fid, generation) => {
     console.log(family.config.nodes);
 }
 
-let maxGenerations = 4;
+let maxGenerations = 5;
 
 const getGeneration = (index) => family.config.nodes[index].generation;
 
@@ -368,7 +321,6 @@ const createFirstGeneration = () => {
     renderType(1);
 
     createChildren(1, 0, 4, getGeneration(0));
-
 }
 
 createFirstGeneration();

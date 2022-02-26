@@ -5383,7 +5383,7 @@ var FamilyTree = function (e, t) {
   }),
   (FamilyTree.prototype._mouseDownHandler = function (e, t, i) {
     var r = this;
-    this.editUI.hide(),
+    // this.editUI.hide(),
       this.searchUI.hide(),
       this.nodeMenuUI.hide(),
       this.nodeContextMenuUI.hide(),
