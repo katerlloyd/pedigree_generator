@@ -1,14 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@200&family=Poppins:wght@300&family=Roboto:wght@100&display=swap');
 
 :root {
-    --main-color: #51680e;
+    --main-color: #40680e;
     --highlight-color: #c9dd8e;
     --light-color: #d9e3bc;
 }
 
 body {
     font-family: 'Poppins', sans-serif;
-    font-size: 14pt;
+    font-size: 17pt;
     margin: 0;
 }
 
@@ -17,7 +17,7 @@ main, header {
 }
 
 main {
-    background-image: linear-gradient(to top, #ffffff 98%, #b4b4b4);
+    background-image: linear-gradient(to top, #ffffff 98.5%, #b4b4b4);
 }
 
 header {
@@ -25,12 +25,16 @@ header {
 }
 
 header, footer {
-    background-image: linear-gradient(to right, #33460f, var(--main-color), #33460f);
+    background-image: linear-gradient(to right, #305208, var(--main-color), #305208);
 }
 
 h1 {
     color: var(--highlight-color);
     letter-spacing: 0.1rem;
+    margin: 0;
+    background: -webkit-linear-gradient(45deg, var(--highlight-color), #ffffff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 select {
