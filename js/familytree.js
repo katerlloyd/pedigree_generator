@@ -1595,7 +1595,7 @@ var FamilyTree = function (e, t) {
     '="control-add"><text fill="#039be5">{link}</text></g>'),
   (FamilyTree.RES = {}),
   (FamilyTree.RES.IT_IS_LONELY_HERE_LINK =
-    "It's lonely here, add your first node"),
+    ""),
   (FamilyTree.FIRE_DRAG_NOT_CLICK_IF_MOVE = 3),
   (FamilyTree.STRING_TAGS = !1),
   (FamilyTree.MAX_NODES_MESS =
