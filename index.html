@@ -30,89 +30,72 @@
         <main>
             <noscript>Your browser does not support JavaScript.</noscript>
 
-            <div class="type">
-                <p class="question">Select an inheritance type: </p>
-                <select name="type" id="type" onchange="checkInheritanceType()">
-                    <option value="Autosomal Dominant">Autosomal Dominant</option>
-                    <option value="Autosomal Recessive">Autosomal Recessive</option>
-                    <option value="X-Linked Dominant">X-Linked Dominant</option>
-                    <option value="X-Linked Recessive">X-Linked Recessive</option>
-                    <option value="Y-Linked">Y-Linked</option>
-                </select>
-            </div>
+            <div id="principle">
+                <div class="type">
+                    <p class="question">Select an inheritance type: </p>
+                    <select name="type" id="type">
+                        <option value="Autosomal Dominant">Autosomal Dominant</option>
+                        <option value="Autosomal Recessive">Autosomal Recessive</option>
+                        <option value="X-Linked Dominant">X-Linked Dominant</option>
+                        <option value="X-Linked Recessive">X-Linked Recessive</option>
+                        <option value="Y-Linked">Y-Linked</option>
+                    </select>
+                </div>
 
-            <p class="question">Select the genotypes of the first two individuals: </p>
-            <div class="genotype-container">
-                <div class="male-genotype-selection">
+                <p class="question">Select the genotypes of the first two individuals: </p>
+                <div class="genotype-container">
                     <p>Male</p>
-                    <ul>
-                        <li>AA</li>
-                        <li>Aa</li>
-                        <li>aa</li>
-                    </ul>
-                    <ul>
-                        <li>X<sup>A</sup>Y</li>
-                        <li>X<sup>a</sup>Y</li>
-                        <li>Y-Linked</li>
-                    </ul>
+                    <ul id="male-genotype-selection"></ul>
                 </div>
-                <div class="female-genotype-selection">
+                <div class="genotype-container">
                     <p>Female</p>
-                    <ul>
-                        <li>AA</li>
-                        <li>Aa</li>
-                        <li>aa</li>
-                    </ul>
-                    <ul>
-                        <li>X<sup>A</sup>X<sup>A</sup></li>
-                        <li>X<sup>A</sup>X<sup>a</sup></li>
-                        <li>X<sup>a</sup>X<sup>a</sup></li>
-                        <li>Y-Linked</li>
-                    </ul>
+                    <ul id="female-genotype-selection"></ul>
                 </div>
-            </div>
-            
-            <div class="children">
-                <p class="question">Select how many children would you like the pair to have: </p>
-                <select name="children" id="children">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                </select>
-            </div>
 
-            <div class="gen">
-                <p class="question">Select how many total generations would you like to chart: </p>
-                <select name="gen" id="gen"></select>
-            </div>
-
-<!--            <p>Please select a setting for all individuals who marry into the family: </p>-->
-<!--            <select name="spouses" id="spouses">-->
-<!--                <option value="unaffected">All spouses are unaffected</option>-->
-<!--                <option value="random">All spouses are randomly assigned a genotype</option>-->
-<!--            </select>-->
-
-            <!-- <div class="spouse-grid">
-                <div class="spouse-option">
-                    <img src="https://placeimg.com/75/75/nature" at="Image placeholder1">
-                    <p>All spouses are unaffected</p>
+                <div class="children">
+                    <p class="question">Select how many children would you like the pair to have: </p>
+                    <select name="children" id="children">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
                 </div>
-                <div class="spouse-option">
-                    <img src="https://placeimg.com/75/75/tech" at="Image placeholder2">
-                    <p>All spouses are randomly assigned a genotype</p>
-                </div>
-            </div> -->
-            <!-- <div class="selection-spouse">
-                <input type="radio" id="html" name="fav_language" value="HTML" checked>
-            <label for="html">All spouses are unaffected</label>
-            </div>
-            <div class="selection-spouse">
-                <input type="radio" id="html" name="fav_language" value="HTML">
-                <label for="html">All spouses are randomly assigned a genotype</label>
-            </div> -->
 
-             <button type="button" id="generate-pedigree">Generate Pedigree</button>
+                <div class="gen">
+                    <p class="question">Select how many total generations would you like to chart: </p>
+                    <select name="gen" id="gen"></select>
+                </div>
+
+    <!--            <p>Please select a setting for all individuals who marry into the family: </p>-->
+    <!--            <select name="spouses" id="spouses">-->
+    <!--                <option value="unaffected">All spouses are unaffected</option>-->
+    <!--                <option value="random">All spouses are randomly assigned a genotype</option>-->
+    <!--            </select>-->
+
+                <!-- <div class="spouse-grid">
+                    <div class="spouse-option">
+                        <img src="https://placeimg.com/75/75/nature" at="Image placeholder1">
+                        <p>All spouses are unaffected</p>
+                    </div>
+                    <div class="spouse-option">
+                        <img src="https://placeimg.com/75/75/tech" at="Image placeholder2">
+                        <p>All spouses are randomly assigned a genotype</p>
+                    </div>
+                </div> -->
+                <!-- <div class="selection-spouse">
+                    <input type="radio" id="html" name="fav_language" value="HTML" checked>
+                <label for="html">All spouses are unaffected</label>
+                </div>
+                <div class="selection-spouse">
+                    <input type="radio" id="html" name="fav_language" value="HTML">
+                    <label for="html">All spouses are randomly assigned a genotype</label>
+                </div> -->
+
+                <button type="button" id="generate-pedigree">Generate Pedigree</button>
+            </div>
+
+            <button type="button" id="new-pedigree">New Pedigree</button>
 
             <div class="legend">
                 <div class="content">
@@ -161,10 +144,6 @@
             </div>
 
             <div style="width:100%; height:700px;" id="tree"></div>
-
-            <!-- <canvas id="pedigree-canvas">Your browser does not support the canvas element.</canvas> -->
-
-            <button type="button" id="download-pedigree">Download Pedigree</button>
         </main>
         <footer>
             <p>&#169;<span id="copyright-year"></span> Pedigree Chart Generator | Kate Clark</p>

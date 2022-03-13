@@ -2133,7 +2133,7 @@ var FamilyTree = function (e, t) {
                   })
                 : "png" === o
                 ? n.obj.exportPNG({
-                    filename: "FamilyTree.png",
+                    filename: "pedigree-chart.png",
                     expandChildren: !1,
                     nodeId: i,
                   })
@@ -5274,30 +5274,30 @@ var FamilyTree = function (e, t) {
   // (FamilyTree.prototype._menuHandlerMouseDownHandler = function (e, t) {
   //   t.stopPropagation(), t.preventDefault();
   // }),
-  // (FamilyTree.prototype._nodeMenuClickHandler = function (e, t, i) {
-  //   this.searchUI.hide(),
-  //     this.nodeMenuUI.hide(),
-  //     this.nodeContextMenuUI.hide(),
-  //     this.menuUI.hide(),
-  //     this.nodeCircleMenuUI.hide();
-  //   var r = this.getNode(e),
-  //     a = null;
-  //   if (Array.isArray(r.tags))
-  //     for (var n = 0; n < r.tags.length; n++) {
-  //       var o = r.tags[n];
-  //       this.config.tags[o] &&
-  //         this.config.tags[o].nodeMenu &&
-  //         (a = this.config.tags[o].nodeMenu);
-  //     }
-  //   this.nodeMenuUI.showStickIn(t, e, null, a);
-  // }),
-  // (FamilyTree.prototype._menuClickHandler = function (e, t) {
-  //   t.stopPropagation(),
-  //     t.preventDefault(),
-  //     this.nodeMenuUI.hide(),
-  //     this.nodeContextMenuUI.hide(),
-  //     this.menuUI.show(e.offsetLeft, e.offsetTop);
-  // }),
+   (FamilyTree.prototype._nodeMenuClickHandler = function (e, t, i) {
+     this.searchUI.hide(),
+       this.nodeMenuUI.hide(),
+       this.nodeContextMenuUI.hide(),
+       this.menuUI.hide(),
+       this.nodeCircleMenuUI.hide();
+     var r = this.getNode(e),
+       a = null;
+     if (Array.isArray(r.tags))
+       for (var n = 0; n < r.tags.length; n++) {
+         var o = r.tags[n];
+         this.config.tags[o] &&
+           this.config.tags[o].nodeMenu &&
+           (a = this.config.tags[o].nodeMenu);
+       }
+     this.nodeMenuUI.showStickIn(t, e, null, a);
+   }),
+   (FamilyTree.prototype._menuClickHandler = function (e, t) {
+     t.stopPropagation(),
+       t.preventDefault(),
+       this.nodeMenuUI.hide(),
+       this.nodeContextMenuUI.hide(),
+       this.menuUI.show(e.offsetLeft, e.offsetTop);
+   }),
   (FamilyTree.prototype._lonelyButtonHandler = function () {
     var e = { id: this.generateId() };
     !1 !== this.addNode(e, null, !0) && this.center(e.id);
@@ -7159,7 +7159,7 @@ var FamilyTree = function (e, t) {
   }),
   (FamilyTree.templates = {}),
   (FamilyTree.templates.base = {
-    defs: `<g transform="matrix(1,0,0,1,0,0)" id="dot"><circle class="bft-fill" cx="0" cy="0" r="5" stroke="#aeaeae" stroke-width="1"></circle></g>\n            <g id="base_node_menu" style="cursor:pointer;"><rect x="0" y="0" fill="transparent" width="22" height="22"></rect><circle cx="4" cy="11" r="2" fill="#ffffff"></circle><circle cx="11" cy="11" r="2" fill="#ffffff"></circle><circle cx="18" cy="11" r="2" fill="#ffffff"></circle></g>\n            <g style="cursor: pointer;" id="base_tree_menu">\n                <rect x="0" y="0" width="25" height="25" fill="transparent"></rect>\n                ${FamilyTree.icon.addUser(
+    defs: `<g transform="matrix(1,0,0,1,0,0)" id="dot"><circle class="bft-fill" cx="0" cy="0" r="5" stroke="#aeaeae" stroke-width="1"></circle></g>\n            <g id="base_node_menu"><rect x="0" y="0" fill="transparent" width="22" height="22"></rect><circle cx="4" cy="11" r="2" fill="transparent"></circle><circle cx="11" cy="11" r="2" fill="transparent"></circle><circle cx="18" cy="11" r="2" fill="transparent"></circle></g>\n            <g style="cursor: pointer;" id="base_tree_menu">\n                <rect x="0" y="0" width="25" height="25" fill="transparent"></rect>\n                ${FamilyTree.icon.addUser(
       25,
       25,
       "#fff",
@@ -7190,9 +7190,9 @@ var FamilyTree = function (e, t) {
       '<g data-pointer="pointer" transform="matrix(0,0,0,0,100,100)"><radialGradient id="pointerGradient"><stop stop-color="#ffffff" offset="0" /><stop stop-color="#C1C1C1" offset="1" /></radialGradient><circle cx="16" cy="16" r="16" stroke-width="1" stroke="#acacac" fill="url(#pointerGradient)"></circle></g>',
     node: '<rect x="0" y="0" height="{h}" width="{w}" stroke-width="1" stroke="#000000" rx="7" ry="7"></rect>',
     menuButton:
-      '<div style="position:absolute;right:{p}px;top:{p}px; width:40px;height:50px;cursor:pointer;" ' +
+      '<div style="position:absolute; right:{p}px;top:{p}px; cursor:pointer;" ' +
       FamilyTree.attr.control_export_menu +
-      '=""><hr style="background-color: #7A7A7A; height: 3px; border: none;"><hr style="background-color: #7A7A7A; height: 3px; border: none;"><hr style="background-color: #7A7A7A; height: 3px; border: none;"></div>',
+      '=""><button type="button" id="download-pedigree">Download Pedigree</button></div>',
     padding: [50, 20, 35, 20],
     nodeMenuButton: `<use ${FamilyTree.attr.control_node_menu_id}="{id}" x="220" y="95" xlink:href="#base_node_menu"/>`,
     nodeTreeMenuButton:
@@ -8579,16 +8579,16 @@ var FamilyTree = function (e, t) {
   }),
   (FamilyTree.loading = {}),
   (FamilyTree.loading.show = function (e) {
-    // var t = document.createElement("div");
-    // (t.id = "bft-loading"),
-    //   (t.innerHTML =
-    //     '<style>@-webkit-keyframes dot-keyframes {0% { opacity: .4; -webkit-transform: scale(1, 1);transform: scale(1, 1);}50% {opacity: 1;-webkit-transform: scale(1.2, 1.2);transform: scale(1.2, 1.2);}100% {opacity: .4;-webkit-transform: scale(1, 1);transform: scale(1, 1);}}@keyframes dot-keyframes {0% {opacity: .4;-webkit-transform: scale(1, 1);transform: scale(1, 1);}50% {opacity: 1;-webkit-transform: scale(1.2, 1.2);transform: scale(1.2, 1.2);}100% {opacity: .4;-webkit-transform: scale(1, 1);transform: scale(1, 1);}}.bft-loading-dots div {margin: 10px;}      .bft-dot-1 {background-color: #039BE5;}.bft-dot-2 {background-color: #F57C00;}.bft-dot-3 {background-color: #FFCA28;}      .bft-loading-dots {text-align: center;width: 100%; position: absolute; top: 0;}.bft-loading-dots--dot {-webkit-animation: dot-keyframes 1.5s infinite ease-in-out;animation: dot-keyframes 1.5s infinite ease-in-out;        border-radius: 10px;display: inline-block;height: 10px;width: 10px;}.bft-loading-dots--dot:nth-child(2) {-webkit-animation-delay: .5s;animation-delay: .5s;}.bft-loading-dots--dot:nth-child(3) {-webkit-animation-delay: 1s;animation-delay: 1s;}</style><div class="bft-loading-dots"><div class="bft-loading-dots--dot bft-dot-1"></div><div class="bft-loading-dots--dot bft-dot-2"></div><div class="bft-loading-dots--dot bft-dot-3"></div></div>'),
-    //   e.element.appendChild(t);
+     var t = document.createElement("div");
+     (t.id = "bft-loading"),
+       (t.innerHTML =
+         '<style>@-webkit-keyframes dot-keyframes {0% { opacity: .4; -webkit-transform: scale(1, 1);transform: scale(1, 1);}50% {opacity: 1;-webkit-transform: scale(1.2, 1.2);transform: scale(1.2, 1.2);}100% {opacity: .4;-webkit-transform: scale(1, 1);transform: scale(1, 1);}}@keyframes dot-keyframes {0% {opacity: .4;-webkit-transform: scale(1, 1);transform: scale(1, 1);}50% {opacity: 1;-webkit-transform: scale(1.2, 1.2);transform: scale(1.2, 1.2);}100% {opacity: .4;-webkit-transform: scale(1, 1);transform: scale(1, 1);}}.bft-loading-dots div {margin: 10px;}      .bft-dot-1 {background-color: #039BE5;}.bft-dot-2 {background-color: #F57C00;}.bft-dot-3 {background-color: #FFCA28;}      .bft-loading-dots {text-align: center;width: 100%; position: absolute; top: 0;}.bft-loading-dots--dot {-webkit-animation: dot-keyframes 1.5s infinite ease-in-out;animation: dot-keyframes 1.5s infinite ease-in-out;        border-radius: 10px;display: inline-block;height: 10px;width: 10px;}.bft-loading-dots--dot:nth-child(2) {-webkit-animation-delay: .5s;animation-delay: .5s;}.bft-loading-dots--dot:nth-child(3) {-webkit-animation-delay: 1s;animation-delay: 1s;}</style><div class="bft-loading-dots"><div class="bft-loading-dots--dot bft-dot-1"></div><div class="bft-loading-dots--dot bft-dot-2"></div><div class="bft-loading-dots--dot bft-dot-3"></div></div>'),
+       e.element.appendChild(t);
   }),
-  // (FamilyTree.loading.hide = function (e) {
-  //   var t = e.element.querySelector("#bft-loading");
-  //   t && t.parentNode.removeChild(t);
-  // }),
+   (FamilyTree.loading.hide = function (e) {
+     var t = e.element.querySelector("#bft-loading");
+     t && t.parentNode.removeChild(t);
+   }),
   // (FamilyTree.pdfPrevUI = {}),
   // FamilyTree.loc || (FamilyTree.loc = {}),
   // (FamilyTree.loc.ppdfCmdTitle = "PDF Preview"),
