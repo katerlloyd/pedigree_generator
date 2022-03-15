@@ -101,7 +101,7 @@ select {
 	width: auto;
 }
 
-select, #male-genotype-selection li, #female-genotype-selection li {
+select, #male-genotype-selection label, #female-genotype-selection label {
     padding: 1rem;
     font-size: 16pt;
     font-weight: bold;
@@ -115,6 +115,7 @@ select, #male-genotype-selection li, #female-genotype-selection li {
 
 #male-genotype-selection, #female-genotype-selection {
 	display: flex;
+	letter-spacing: 0.15rem;
 }
 
 .legend, #male-genotype-selection, #female-genotype-selection {
@@ -124,11 +125,12 @@ select, #male-genotype-selection li, #female-genotype-selection li {
     margin: 1rem 0;
 }
 
-#male-genotype-selection li, #female-genotype-selection li {
-	list-style-type: none;
+#male-genotype-selection label, #female-genotype-selection label {
 	padding: 1rem;
 	margin-right: 1rem;
+	margin-bottom: 0.5rem;
 	border: 1px solid var(--main-color);
+	cursor: pointer;
 }
 
 #male-genotype-selection, #female-genotype-selection {
@@ -136,6 +138,15 @@ select, #male-genotype-selection li, #female-genotype-selection li {
 	flex-direction: row;
 	padding: 0;
 	margin: 0;
+}
+
+#male-genotype-selection input[type="radio"]:checked + label, #female-genotype-selection input[type="radio"]:checked + label {
+	background-color: var(--main-color);
+	color: var(--light-color);
+}
+
+input[type="radio"] {
+	display: none;
 }
 
 .content {

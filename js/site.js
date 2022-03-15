@@ -1,15 +1,7 @@
-//#region Responsive Navigation Bar
-// document.querySelector('.bar-icon').addEventListener('click', () => {
-//     document.querySelector('.navigation').classList.toggle('responsive');
-// }, false);
-
-// window.onresize = () => {
-//     if (window.innerWidth > 675) document.querySelector('.navigation').classList.remove('responsive')
-// };
-//#endregion
-
+// Execute when page loads.
 window.onload  = () => {
 
+	// ADD COMMENTS
 	let selectGen = document.querySelector('select#gen');
 
 	for (let i = 3; i < 7; i++) {
@@ -20,8 +12,10 @@ window.onload  = () => {
 	    selectGen.appendChild(option);
 	};
 
+	// ADD COMMENTS
 	let inheritanceType = document.getElementById('type').value;
 
+	// ADD COMMENTS
 	const checkInheritanceType = () => {
 		if (document.getElementById('type').value.includes('Recessive')) {
             const carrierIcon = document.getElementById('carrier');
@@ -39,24 +33,36 @@ window.onload  = () => {
         return inheritanceType;
 	}
 
+	// ADD COMMENTS
 	const createMaleGenotypeList = () => {
-		const ul = document.getElementById('male-genotype-selection');
-		let list;
-		if (inheritanceType.includes('Autosomal')) {
-			list = ['AA', 'Aa', 'aa'];
-		} else {
-			list = ['X<sup>A</sup>Y', 'X<sup>a</sup>Y'];
-		}
+        const form = document.getElementById('male-genotype-selection');
+        let list;
+        if (inheritanceType.includes('Autosomal')) {
+            list = ['AA', 'Aa', 'aa'];
+        } else {
+            list = ['X<sup>A</sup>Y', 'X<sup>a</sup>Y'];
+        }
 
-		list.forEach(item => {
-			const li = document.createElement('li');
-			li.innerHTML = item;
-			ul.appendChild(li);
-		});
+        list.forEach(item => {
+            let input = document.createElement('input');
+            input.setAttribute('type', 'radio');
+            input.setAttribute('id', `male${item}`);
+            input.setAttribute('name', 'male-genotype');
+            input.setAttribute('value', `${item}`);
+            form.appendChild(input);
+
+            let label = document.createElement('label');
+            label.setAttribute('for', `male${item}`);
+            label.innerHTML = item;
+            form.appendChild(label);
+        });
+
+        form.firstChild.defaultChecked = true;
 	}
 
+	// ADD COMMENTS
 	const createFemaleGenotypeList = () => {
-        const ul = document.getElementById('female-genotype-selection');
+        const form = document.getElementById('female-genotype-selection');
         let list;
         if (inheritanceType.includes('Autosomal')) {
             list = ['AA', 'Aa', 'aa'];
@@ -65,12 +71,23 @@ window.onload  = () => {
         }
 
         list.forEach(item => {
-            const li = document.createElement('li');
-            li.innerHTML = item;
-            ul.appendChild(li);
+            let input = document.createElement('input');
+            input.setAttribute('type', 'radio');
+            input.setAttribute('id', `female${item}`);
+            input.setAttribute('name', 'female-genotype');
+            input.setAttribute('value', `${item}`);
+            form.appendChild(input);
+
+            let label = document.createElement('label');
+            label.setAttribute('for', `female${item}`);
+            label.innerHTML = item;
+            form.appendChild(label);
         });
+
+         form.firstChild.defaultChecked = true;
     }
 
+	// ADD COMMENTS
     const removeMaleGenotypeList = () => {
         const items = document.querySelector('#male-genotype-selection');
         if (items) {
@@ -80,6 +97,7 @@ window.onload  = () => {
         }
     }
 
+	// ADD COMMENTS
     const removeFemaleGenotypeList = () => {
         const items = document.querySelector('#female-genotype-selection');
         if (items) {
@@ -89,13 +107,29 @@ window.onload  = () => {
         }
     }
 
+	// ADD COMMENTS
     createMaleGenotypeList();
     createFemaleGenotypeList();
 
+	// ADD COMMENTS
+    const getFirstMaleGenotype = () => {
+		// TODO
+		return 'Aa';
+    }
+
+	// ADD COMMENTS
+    const getFirstFemaleGenotype = () => {
+		//TODO
+        return 'Aa';
+    }
+
+	// ADD COMMENTS
 	document.getElementById('type').addEventListener('change', checkInheritanceType);
 
+	// ADD COMMENTS
 	const generatePedigreeChart = () => {
 
+		// ADD COMMENTS
 		const family = new FamilyTree(document.getElementById("tree"), {
 		    mouseScroll: FamilyTree.action.scroll,
 		    scaleInitial: FamilyTree.match.boundary,
@@ -118,17 +152,21 @@ window.onload  = () => {
 		    nodes: []
 		});
 
+		// ADD COMMENTS
 		const getLastId = () => {
 		    let lastIndex = family.config.nodes.length - 1;
 		    return family.config.nodes[lastIndex].id;
 		}
 
+		// ADD COMMENTS
 		const getMid = (index) => {
 		    return family.config.nodes[index].mid
 		}
 
+		// ADD COMMENTS
 		const getFid = (index) => family.config.nodes[index].fid;
 
+		// ADD COMMENTS
 		const getRandomGenotype = (gender) => {
 		    let options = [];
 		    switch (inheritanceType) {
@@ -150,6 +188,7 @@ window.onload  = () => {
 		    }
 		}
 
+		// ADD COMMENTS
 		const setGenotype = (index) => {
 		    let num1 = Math.floor(Math.random() * 2);
 		    let num2 = Math.floor(Math.random() * 2);
@@ -255,8 +294,10 @@ window.onload  = () => {
 		    }
 		}
 
+		// ADD COMMENTS
 		const getAffected = (index) => family.config.nodes[index].affected;
 
+		// ADD COMMENTS
 		const setCarrier = (index) => {
 		    switch (inheritanceType) {
 		        case 'Autosomal Recessive':
@@ -284,8 +325,10 @@ window.onload  = () => {
 		    }
 		}
 
+		// ADD COMMENTS
 		const getCarrier = (index) => family.config.nodes[index].carrier;
 
+		// ADD COMMENTS
 		const renderType = (index) => {
 		    if (getCarrier(index)) {
 		        if (getGender(index) === 'male') {
@@ -302,9 +345,11 @@ window.onload  = () => {
 		    }
 		}
 
+		// ADD COMMENTS
 		const setNumberofChildren = () => Math.floor(Math.random() * 5);
 	//	 const setNumberofChildren = () => Math.ceil(Math.random() * 4);
 
+		// ADD COMMENTS
 		const getOppositeGender = (index) => {
 		    if (getGender(index) === 'male') {
 		        return 'female';
@@ -313,6 +358,7 @@ window.onload  = () => {
 		    }
 		}
 
+		// ADD COMMENTS
 		const createPair = (index, generation) => {
 		    let pairId = index + 1;
 		    let individualPair = { id: pairId, mid: null, fid: null, pids: [], genotype: null, gender: null, affected: null, carrier: null, generation: generation };
@@ -321,13 +367,6 @@ window.onload  = () => {
 		        setGenotype(pairId);
 		        setGender(pairId);
 		    }
-
-		    // let probability = Math.ceil(Math.random() * 2);
-		    // if (inheritanceType === 'Y-Linked' && getGender(pairId) === "male" && probability === 2) {
-		    //     family.config.nodes[pairId].affected = true;
-		    // } else {
-		    //     setAffected(pairId);
-		    // }
 
 		    setAffected(pairId);
 		    setCarrier(pairId);
@@ -349,6 +388,7 @@ window.onload  = () => {
 		    createChildren(mid, fid, numberOfChildren, generation);
 		}
 
+		// ADD COMMENTS
 		const createIndividual = (mid, fid, generation) => {
 		    console.log(family.config.nodes);
 		    let currentId = getLastId() + 1;
@@ -369,10 +409,13 @@ window.onload  = () => {
 		    console.log(family.config.nodes);
 		}
 
+		// ADD COMMENTS
 		let maxGenerations = selectGen.value;
 
+		// ADD COMMENTS
 		const getGeneration = (index) => family.config.nodes[index].generation;
 
+		// ADD COMMENTS
 		const createChildren = (mid, fid, numberOfChildren, currentGeneration) => {
 		    if (maxGenerations > currentGeneration) {
 		        let nextGeneration = currentGeneration + 1;
@@ -384,18 +427,16 @@ window.onload  = () => {
 
 		// ADD COMMENTS
 		const createFirstGeneration = () => {
-		     let maleGenotype = 'Aa';
-		     let femaleGenotype = 'Aa';
-//		    let maleGenotype = 'XAY';
-//		    let femaleGenotype = 'XAXa';
+		     let maleGenotype = getFirstMaleGenotype();
+		     let femaleGenotype = getFirstFemaleGenotype();
 
-		    let firstMale = {id: 0, mid: null, fid: null, pids: [1], genotype: maleGenotype, gender: "male", affected: null, generation: 1};
+		    let firstMale = { id: 0, mid: null, fid: null, pids: [1], genotype: maleGenotype, gender: "male", affected: null, generation: 1 };
 		    family.config.nodes.push(firstMale);
 		    setAffected(0);
 		    setCarrier(0);
 		    renderType(0);
 
-		    let firstFemale = {id: 1, mid: null, fid: null, pids: [0], genotype: femaleGenotype, gender: "female", affected: null, generation: 1};
+		    let firstFemale = { id: 1, mid: null, fid: null, pids: [0], genotype: femaleGenotype, gender: "female", affected: null, generation: 1 };
 		    family.config.nodes.push(firstFemale);
 		    setAffected(1);
 		    setCarrier(1);
@@ -451,7 +492,6 @@ window.onload  = () => {
 		newPedigreeButton.addEventListener('click', () => location.reload());
 		newPedigreeButton.style.display = 'block';
 	});
-
 }
 
 //#region Copyright Year
