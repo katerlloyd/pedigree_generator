@@ -1,7 +1,7 @@
 // Execute when page loads.
 window.onload  = () => {
 
-	// ADD COMMENTS
+	// Populate the generation dropdown with 3-6.
 	let selectGen = document.querySelector('select#gen');
 
 	for (let i = 3; i < 7; i++) {
@@ -12,10 +12,10 @@ window.onload  = () => {
 	    selectGen.appendChild(option);
 	};
 
-	// ADD COMMENTS
+	// Get the inheritance type from the dropdown.
 	let inheritanceType = document.getElementById('type').value;
 
-	// ADD COMMENTS
+	// Update the male/female genotype options and add/remove the carrier icon when the inheritance type is updated.
 	const checkInheritanceType = () => {
 		if (document.getElementById('type').value.includes('Recessive')) {
             const carrierIcon = document.getElementById('carrier');
@@ -33,7 +33,13 @@ window.onload  = () => {
         return inheritanceType;
 	}
 
-	// ADD COMMENTS
+    const getFirstMaleGenotype = () => {
+        let firstMaleGenotype = document.querySelector('input[name="male-genotype"]:checked').value;
+        console.log(firstMaleGenotype);
+        return firstMaleGenotype;
+    }
+
+	// Build the male genotype radio list selection.
 	const createMaleGenotypeList = () => {
         const form = document.getElementById('male-genotype-selection');
         let list;
@@ -49,6 +55,7 @@ window.onload  = () => {
             input.setAttribute('id', `male${item}`);
             input.setAttribute('name', 'male-genotype');
             input.setAttribute('value', `${item}`);
+            input.setAttribute('onclick', getFirstMaleGenotype);
             form.appendChild(input);
 
             let label = document.createElement('label');
@@ -60,7 +67,7 @@ window.onload  = () => {
         form.firstChild.defaultChecked = true;
 	}
 
-	// ADD COMMENTS
+	// Build the female genotype radio list selection.
 	const createFemaleGenotypeList = () => {
         const form = document.getElementById('female-genotype-selection');
         let list;
@@ -87,7 +94,7 @@ window.onload  = () => {
          form.firstChild.defaultChecked = true;
     }
 
-	// ADD COMMENTS
+	// Remove the male genotype radio list selection.
     const removeMaleGenotypeList = () => {
         const items = document.querySelector('#male-genotype-selection');
         if (items) {
@@ -97,7 +104,7 @@ window.onload  = () => {
         }
     }
 
-	// ADD COMMENTS
+	// Remove the female genotype radio list selection.
     const removeFemaleGenotypeList = () => {
         const items = document.querySelector('#female-genotype-selection');
         if (items) {
@@ -107,40 +114,54 @@ window.onload  = () => {
         }
     }
 
-	// ADD COMMENTS
+	// Build both of the male/female genotype selection lists.
     createMaleGenotypeList();
     createFemaleGenotypeList();
 
-	// ADD COMMENTS
-    const getFirstMaleGenotype = () => {
-		// TODO
-		return 'Aa';
-    }
+    let firstMaleGenotype = document.querySelector('input[name="male-genotype"]:checked').value;
+    console.log(firstMaleGenotype);
 
-	// ADD COMMENTS
-    const getFirstFemaleGenotype = () => {
-		//TODO
-        return 'Aa';
-    }
+	// Get the first male genotype from the user selection list.
+//	let maleForm = document.getElementById('male-genotype-selection');
+//	let maleRadios = maleForm.elements['male-genotype'];
+//	console.log(maleRadios);
+//	for (let i=0; i <= maleRadios.length; i++) {
+//        if (maleRadios[i].checked) {
+//            return maleRadios[i].value;
+//        }
+//    }
 
-	// ADD COMMENTS
+	// Get the first female genotype from the user selection list.
+//	let femaleForm = document.getElementById('female-genotype-selection');
+//	let femaleRadios = femaleForm.elements['female-genotype'];
+//	console.log(femaleRadios);
+//	for (let i=0; i <= femaleRadios.length; i++) {
+//		console.log(radios[i].value);
+//        if (femaleRadios[i].checked) {
+//            return femaleRadios[i].value;
+//        }
+//    }
+
+	// Update the inheritance type when a selection is changed.
 	document.getElementById('type').addEventListener('change', checkInheritanceType);
 
-	// ADD COMMENTS
+	// Build the pedigree chart.
 	const generatePedigreeChart = () => {
 
-		// ADD COMMENTS
+		// Create the family object to initialize the pedigree chart.
 		const family = new FamilyTree(document.getElementById("tree"), {
 		    mouseScroll: FamilyTree.action.scroll,
 		    scaleInitial: FamilyTree.match.boundary,
 		    enableSearch: false,
 		    editForm: {},
+		    // Enable the png image download option.
 		    menu: {
                 png: { text: "Export PNG" }
             },
             nodeMenu: {
                 png: { text: "Export PNG" }
             },
+            // Initialize the attributes for each individual.
 		    nodeBinding: {
 		        field_0: "gender",
 		        field_1: "genotype",
@@ -149,24 +170,25 @@ window.onload  = () => {
 		        field_4: "generation",
 		        img_0: "img"
 		    },
+		    // Initialize the list of individuals.
 		    nodes: []
 		});
 
-		// ADD COMMENTS
+		// Get the id of the last individual in the list.
 		const getLastId = () => {
 		    let lastIndex = family.config.nodes.length - 1;
 		    return family.config.nodes[lastIndex].id;
 		}
 
-		// ADD COMMENTS
+		// Get the mother id of the individual.
 		const getMid = (index) => {
 		    return family.config.nodes[index].mid
 		}
 
-		// ADD COMMENTS
+		// Get the father id of the individual.
 		const getFid = (index) => family.config.nodes[index].fid;
 
-		// ADD COMMENTS
+		// Get the a random genotype for the individual.
 		const getRandomGenotype = (gender) => {
 		    let options = [];
 		    switch (inheritanceType) {
@@ -188,7 +210,7 @@ window.onload  = () => {
 		    }
 		}
 
-		// ADD COMMENTS
+		// Set the genotype of the individual based on the inheritance type.
 		const setGenotype = (index) => {
 		    let num1 = Math.floor(Math.random() * 2);
 		    let num2 = Math.floor(Math.random() * 2);
@@ -234,10 +256,10 @@ window.onload  = () => {
 		    family.config.nodes[index].genotype = genotype;
 		}
 
-		// ADD COMMENTS
+		// Get the genotype of the individual.
 		const getGenotype = (index) => family.config.nodes[index].genotype;
 
-		// ADD COMMENTS
+		// Set the gender of the individual based on their genotype.
 		const setGender = (index) => {
 		    let num = Math.ceil(Math.random() * 2);
 		    if (getGenotype(index).includes('Y') || (getGenotype(index).length === 2 && num === 2)) {
@@ -247,10 +269,10 @@ window.onload  = () => {
 		    }
 		}
 
-		// ADD COMMENTS
+		// Get the gender of the individual.
 		const getGender = (index) => family.config.nodes[index].gender;
 
-		// ADD COMMENTS
+		// Determine if the individual expresses the phenotype based on the genotype.
 		const setAffected = (index) => {
 		    switch (inheritanceType) {
 		        case 'Autosomal Dominant':
@@ -294,10 +316,10 @@ window.onload  = () => {
 		    }
 		}
 
-		// ADD COMMENTS
+		// Get the affected status of the individual.
 		const getAffected = (index) => family.config.nodes[index].affected;
 
-		// ADD COMMENTS
+		// Determine whether an individual is a carrier of the recessive allele based on the inheritance type.
 		const setCarrier = (index) => {
 		    switch (inheritanceType) {
 		        case 'Autosomal Recessive':
@@ -325,10 +347,10 @@ window.onload  = () => {
 		    }
 		}
 
-		// ADD COMMENTS
+		// Get the carrier status of the individual.
 		const getCarrier = (index) => family.config.nodes[index].carrier;
 
-		// ADD COMMENTS
+		// Add the SVG rectangle/circle shape to the individual based on their affected and carrier status.
 		const renderType = (index) => {
 		    if (getCarrier(index)) {
 		        if (getGender(index) === 'male') {
@@ -345,11 +367,10 @@ window.onload  = () => {
 		    }
 		}
 
-		// ADD COMMENTS
+		// Set the number of children that each pair can have (0-4).
 		const setNumberofChildren = () => Math.floor(Math.random() * 5);
-	//	 const setNumberofChildren = () => Math.ceil(Math.random() * 4);
 
-		// ADD COMMENTS
+		// Get the opposite gender of the individual to determine spouse gender.
 		const getOppositeGender = (index) => {
 		    if (getGender(index) === 'male') {
 		        return 'female';
@@ -358,7 +379,7 @@ window.onload  = () => {
 		    }
 		}
 
-		// ADD COMMENTS
+		// Create an individual to pair to the current individual and generate their children.
 		const createPair = (index, generation) => {
 		    let pairId = index + 1;
 		    let individualPair = { id: pairId, mid: null, fid: null, pids: [], genotype: null, gender: null, affected: null, carrier: null, generation: generation };
@@ -388,7 +409,7 @@ window.onload  = () => {
 		    createChildren(mid, fid, numberOfChildren, generation);
 		}
 
-		// ADD COMMENTS
+		// Create an individual and their pair.
 		const createIndividual = (mid, fid, generation) => {
 		    console.log(family.config.nodes);
 		    let currentId = getLastId() + 1;
@@ -409,13 +430,13 @@ window.onload  = () => {
 		    console.log(family.config.nodes);
 		}
 
-		// ADD COMMENTS
+		// Set the maximum number of generations that the chart can go to as specified by the user.
 		let maxGenerations = selectGen.value;
 
-		// ADD COMMENTS
+		// Get the generation number of the individual.
 		const getGeneration = (index) => family.config.nodes[index].generation;
 
-		// ADD COMMENTS
+		// Create the children of each pair until the max generation is completed.
 		const createChildren = (mid, fid, numberOfChildren, currentGeneration) => {
 		    if (maxGenerations > currentGeneration) {
 		        let nextGeneration = currentGeneration + 1;
@@ -425,7 +446,7 @@ window.onload  = () => {
 		    }
 		}
 
-		// ADD COMMENTS
+		// Create the first generation of individuals based on the user input.
 		const createFirstGeneration = () => {
 		     let maleGenotype = getFirstMaleGenotype();
 		     let femaleGenotype = getFirstFemaleGenotype();
@@ -450,31 +471,31 @@ window.onload  = () => {
 		createFirstGeneration();
 	}
 
-	// ADD COMMENTS
+	// Display the loading icon.
 	const showLoadingIcon = () => {
 		const box = document.getElementById('box');
 		box.style.display = 'block';
 	}
 
-	// ADD COMMENTS
+	// Hide the loading icon.
 	const removeLoadingIcon = () => {
 		const box = document.getElementById('box');
 	    box.style.display = 'none';
 	}
 
-	// ADD COMMENTS
+	// Display the pedigree chart.
 	const showChart = () => {
 		const box = document.getElementById('tree');
 		box.style.opacity = '1';
 	}
 
-	// ADD COMMENTS
+	// Hide the pedigree chart.
 	const removeChart = () => {
 		const box = document.getElementById('tree');
 		box.style.opacity = '0';
 	}
 
-	// ADD COMMENTS
+	// Set button to display the loading icon and pedigree chart and reset the chart info.
 	const generatePedigreeButton = document.getElementById('generate-pedigree');
 	generatePedigreeButton.addEventListener('click', () => {
 		const principle = document.getElementById('principle');
@@ -488,6 +509,7 @@ window.onload  = () => {
 		generatePedigreeChart();
 		setTimeout(removeLoadingIcon, 1000);
 		setTimeout(showChart, 1000);
+
 		const newPedigreeButton = document.getElementById('new-pedigree');
 		newPedigreeButton.addEventListener('click', () => location.reload());
 		newPedigreeButton.style.display = 'block';
