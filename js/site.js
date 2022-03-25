@@ -35,8 +35,14 @@ window.onload  = () => {
 
     const getFirstMaleGenotype = () => {
         let firstMaleGenotype = document.querySelector('input[name="male-genotype"]:checked').value;
-        console.log(firstMaleGenotype);
+        firstMaleGenotype = firstMaleGenotype.replace(/\<sup\>/g, '').replace(/\<\/sup\>/g, '');
         return firstMaleGenotype;
+    }
+
+    const getFirstFemaleGenotype = () => {
+        let firstFemaleGenotype = document.querySelector('input[name="female-genotype"]:checked').value;
+        firstFemaleGenotype = firstFemaleGenotype.replace(/\<sup\>/g, '').replace(/\<\/sup\>/g, '');
+        return firstFemaleGenotype;
     }
 
 	// Build the male genotype radio list selection.
@@ -55,7 +61,6 @@ window.onload  = () => {
             input.setAttribute('id', `male${item}`);
             input.setAttribute('name', 'male-genotype');
             input.setAttribute('value', `${item}`);
-            input.setAttribute('onclick', getFirstMaleGenotype);
             form.appendChild(input);
 
             let label = document.createElement('label');
@@ -118,32 +123,30 @@ window.onload  = () => {
     createMaleGenotypeList();
     createFemaleGenotypeList();
 
-    let firstMaleGenotype = document.querySelector('input[name="male-genotype"]:checked').value;
-    console.log(firstMaleGenotype);
+	const maleForm = document.getElementById('male-genotype-selection').addEventListener('change', () => {
+		const maleRadios = document.querySelectorAll('input[name="male-genotype"]');
 
-	// Get the first male genotype from the user selection list.
-//	let maleForm = document.getElementById('male-genotype-selection');
-//	let maleRadios = maleForm.elements['male-genotype'];
-//	console.log(maleRadios);
-//	for (let i=0; i <= maleRadios.length; i++) {
-//        if (maleRadios[i].checked) {
-//            return maleRadios[i].value;
-//        }
-//    }
+        maleRadios.forEach(radio => {
+            if (radio.checked) {
+                maleGenotype = radio.value;
+                maleGenotype = maleGenotype.replace(/\<sup\>/g, '').replace(/\<\/sup\>/g, '');
+            }
+        });
+	});
 
-	// Get the first female genotype from the user selection list.
-//	let femaleForm = document.getElementById('female-genotype-selection');
-//	let femaleRadios = femaleForm.elements['female-genotype'];
-//	console.log(femaleRadios);
-//	for (let i=0; i <= femaleRadios.length; i++) {
-//		console.log(radios[i].value);
-//        if (femaleRadios[i].checked) {
-//            return femaleRadios[i].value;
-//        }
-//    }
+	const femaleForm = document.getElementById('female-genotype-selection').addEventListener('change', () => {
+		const femaleRadios = document.querySelectorAll('input[name="female-genotype"]');
+
+        femaleRadios.forEach(radio => {
+            if (radio.checked) {
+                femaleGenotype = radio.value;
+                femaleGenotype = femaleGenotype.replace(/\<sup\>/g, '').replace(/\<\/sup\>/g, '');
+            }
+        });
+	});
 
 	// Update the inheritance type when a selection is changed.
-	document.getElementById('type').addEventListener('change', checkInheritanceType);
+    document.getElementById('type').addEventListener('change', checkInheritanceType);
 
 	// Build the pedigree chart.
 	const generatePedigreeChart = () => {
@@ -368,7 +371,7 @@ window.onload  = () => {
 		}
 
 		// Set the number of children that each pair can have (0-4).
-		const setNumberofChildren = () => Math.floor(Math.random() * 5);
+		const setNumberOfChildren = () => Math.floor(Math.random() * 5);
 
 		// Get the opposite gender of the individual to determine spouse gender.
 		const getOppositeGender = (index) => {
@@ -404,14 +407,13 @@ window.onload  = () => {
 		        fid = pairId;
 		    }
 
-		    let numberOfChildren = setNumberofChildren();
+		    let numberOfChildren = setNumberOfChildren();
 
 		    createChildren(mid, fid, numberOfChildren, generation);
 		}
 
 		// Create an individual and their pair.
 		const createIndividual = (mid, fid, generation) => {
-		    console.log(family.config.nodes);
 		    let currentId = getLastId() + 1;
 		    let individual = { id: currentId, mid: mid, fid: fid, pids: [], genotype: null, gender: null, affected: null, carrier: null, generation: generation };
 		    family.config.nodes.push(individual);
@@ -426,8 +428,6 @@ window.onload  = () => {
 		    if (generation !== maxGenerations && num !== 4) {
 		        createPair(currentId, generation);
 		    }
-
-		    console.log(family.config.nodes);
 		}
 
 		// Set the maximum number of generations that the chart can go to as specified by the user.
