@@ -1,7 +1,7 @@
 // Execute when page loads.
-window.onload  = () => {
+window.onload = () => {
 
-	// Populate the generation dropdown with 3-6.
+	// Populate the generation dropdown with numbers from 3 to 6.
 	let selectGen = document.querySelector('select#gen');
 
 	for (let i = 3; i < 7; i++) {
@@ -47,7 +47,8 @@ window.onload  = () => {
 
 	// Build the male genotype radio list selection.
 	const createMaleGenotypeList = () => {
-        const form = document.getElementById('male-genotype-selection');
+        const fieldset = document.getElementById('male-genotype-selection');
+
         let list;
         if (inheritanceType.includes('Autosomal')) {
             list = ['AA', 'Aa', 'aa'];
@@ -61,20 +62,26 @@ window.onload  = () => {
             input.setAttribute('id', `male${item}`);
             input.setAttribute('name', 'male-genotype');
             input.setAttribute('value', `${item}`);
-            form.appendChild(input);
+            fieldset.appendChild(input);
 
             let label = document.createElement('label');
             label.setAttribute('for', `male${item}`);
             label.innerHTML = item;
-            form.appendChild(label);
+            fieldset.appendChild(label);
         });
 
-        form.firstChild.defaultChecked = true;
+        let legend = document.createElement('legend');
+        legend.textContent = 'Male';
+        fieldset.appendChild(legend);
+
+        fieldset.firstChild.defaultChecked = true;
+
 	}
 
 	// Build the female genotype radio list selection.
 	const createFemaleGenotypeList = () => {
-        const form = document.getElementById('female-genotype-selection');
+        const fieldset = document.getElementById('female-genotype-selection');
+
         let list;
         if (inheritanceType.includes('Autosomal')) {
             list = ['AA', 'Aa', 'aa'];
@@ -88,15 +95,19 @@ window.onload  = () => {
             input.setAttribute('id', `female${item}`);
             input.setAttribute('name', 'female-genotype');
             input.setAttribute('value', `${item}`);
-            form.appendChild(input);
+            fieldset.appendChild(input);
 
             let label = document.createElement('label');
             label.setAttribute('for', `female${item}`);
             label.innerHTML = item;
-            form.appendChild(label);
+            fieldset.appendChild(label);
         });
 
-         form.firstChild.defaultChecked = true;
+        let legend = document.createElement('legend');
+        legend.textContent = 'Female';
+        fieldset.appendChild(legend);
+
+         fieldset.firstChild.defaultChecked = true;
     }
 
 	// Remove the male genotype radio list selection.
@@ -123,7 +134,8 @@ window.onload  = () => {
     createMaleGenotypeList();
     createFemaleGenotypeList();
 
-	const maleForm = document.getElementById('male-genotype-selection').addEventListener('change', () => {
+	// Select the checked male radio button and sanitize input.
+	const maleFieldset = document.getElementById('male-genotype-selection').addEventListener('change', () => {
 		const maleRadios = document.querySelectorAll('input[name="male-genotype"]');
 
         maleRadios.forEach(radio => {
@@ -134,7 +146,8 @@ window.onload  = () => {
         });
 	});
 
-	const femaleForm = document.getElementById('female-genotype-selection').addEventListener('change', () => {
+	// Select the checked female radio button and sanitize input.
+	const femaleFieldset = document.getElementById('female-genotype-selection').addEventListener('change', () => {
 		const femaleRadios = document.querySelectorAll('input[name="female-genotype"]');
 
         femaleRadios.forEach(radio => {
@@ -147,6 +160,9 @@ window.onload  = () => {
 
 	// Update the inheritance type when a selection is changed.
     document.getElementById('type').addEventListener('change', checkInheritanceType);
+
+	// Set count to ensure that all generations have at least one marriage and child until the last generation.
+	let count = 1;
 
 	// Build the pedigree chart.
 	const generatePedigreeChart = () => {
@@ -191,7 +207,7 @@ window.onload  = () => {
 		// Get the father id of the individual.
 		const getFid = (index) => family.config.nodes[index].fid;
 
-		// Get the a random genotype for the individual.
+		// Get a random genotype for the individual.
 		const getRandomGenotype = (gender) => {
 		    let options = [];
 		    switch (inheritanceType) {
@@ -409,6 +425,10 @@ window.onload  = () => {
 
 		    let numberOfChildren = setNumberOfChildren();
 
+		    if (numberOfChildren === 0 && count <= maxGenerations) {
+		        numberOfChildren = 1;
+		    }
+
 		    createChildren(mid, fid, numberOfChildren, generation);
 		}
 
@@ -425,7 +445,7 @@ window.onload  = () => {
 
 		    let num = Math.ceil(Math.random() * 4);
 
-		    if (generation !== maxGenerations && num !== 4) {
+		    if (generation < maxGenerations && (count < maxGenerations || num !== 4)) {
 		        createPair(currentId, generation);
 		    }
 		}
@@ -438,12 +458,15 @@ window.onload  = () => {
 
 		// Create the children of each pair until the max generation is completed.
 		const createChildren = (mid, fid, numberOfChildren, currentGeneration) => {
+			count++;
 		    if (maxGenerations > currentGeneration) {
 		        let nextGeneration = currentGeneration + 1;
+
 		        for (let i=0; i < numberOfChildren; i++) {
 		            createIndividual(mid, fid, nextGeneration);
 		        }
 		    }
+		    return count;
 		}
 
 		// Create the first generation of individuals based on the user input.
@@ -486,13 +509,13 @@ window.onload  = () => {
 	// Display the pedigree chart.
 	const showChart = () => {
 		const box = document.getElementById('tree');
-		box.style.opacity = '1';
+		box.style.display = 'block';
 	}
 
 	// Hide the pedigree chart.
 	const removeChart = () => {
 		const box = document.getElementById('tree');
-		box.style.opacity = '0';
+		box.style.display = 'none';
 	}
 
 	// Set button to display the loading icon and pedigree chart and reset the chart info.

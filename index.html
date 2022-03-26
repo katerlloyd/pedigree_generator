@@ -9,119 +9,112 @@
         <link rel="stylesheet" href="css/styles.css" media="screen">
         <script defer src="js/familytree.js"></script>
         <script defer src="js/site.js"></script>
-        <!-- <reference path="orgchart.d.ts" />
-        <reference path="familytree.d.ts" /> -->
     </head>
     <body>
-        <header>
-            <!-- <picture>
-                <img class="logo" src="images/logo-white.svg" alt="Circle with lines intersecting through it" loading="lazy" height="70" width="70">
-            </picture> -->
-            <section class="headings">
-                <h1>Pedigree Chart Generator</h1>
-            </section>
-        </header>
-        <!-- <nav>
-            <ul class="navigation">
-                <li class="bar-icon"><a href="#">&#9776;</a></li>
-                <li class="active"><a href="#">Home</a></li>  
-            </ul>
-        </nav> -->
-        <main>
-            <noscript>Your browser does not support JavaScript.</noscript>
+        <div id="page-container">
+            <header>
+    <!--            <picture>-->
+    <!--                <img class="logo" src="images/logo-white.svg" alt="Circle with lines intersecting through it" loading="lazy" height="70" width="70">-->
+    <!--            </picture>-->
+                <section class="headings">
+                    <h1>Pedigree Chart Generator</h1>
+                </section>
+            </header>
+            <main>
+                <noscript>Your browser does not support JavaScript.</noscript>
 
-            <div id="principle">
-                <div class="type">
-                    <p class="question">Select an inheritance type: </p>
-                    <select name="type" id="type">
-                        <option value="Autosomal Dominant">Autosomal Dominant</option>
-                        <option value="Autosomal Recessive">Autosomal Recessive</option>
-                        <option value="X-Linked Dominant">X-Linked Dominant</option>
-                        <option value="X-Linked Recessive">X-Linked Recessive</option>
-                        <option value="Y-Linked">Y-Linked</option>
-                    </select>
+                <div id="principle">
+                    <div class="type">
+                        <label class="question">Select an inheritance type:
+                            <select name="type" id="type">
+                                <option value="Autosomal Dominant">Autosomal Dominant</option>
+                                <option value="Autosomal Recessive">Autosomal Recessive</option>
+                                <option value="X-Linked Dominant">X-Linked Dominant</option>
+                                <option value="X-Linked Recessive">X-Linked Recessive</option>
+                                <option value="Y-Linked">Y-Linked</option>
+                            </select>
+                        </label>
+                    </div>
+
+                    <p class="question">Select the genotypes of the first two individuals: </p>
+                    <form class="genotype-container">
+                        <fieldset id="male-genotype-selection"></fieldset>
+                        <fieldset id="female-genotype-selection"></fieldset>
+                    </form>
+
+                    <div class="children">
+                        <label class="question">Select how many children would you like the pair to have:
+                            <select name="children" id="children">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+                        </label>
+                    </div>
+
+                    <div class="gen">
+                        <label class="question">Select how many total generations would you like to chart:
+                            <select name="gen" id="gen"></select>
+                        </label>
+                    </div>
+
+                    <button type="button" id="generate-pedigree">Generate Pedigree</button>
                 </div>
 
-                <p class="question">Select the genotypes of the first two individuals: </p>
-                <div class="genotype-container">
-                    <p>Male</p>
-                    <form id="male-genotype-selection"></form>
+                <button type="button" id="new-pedigree">New Pedigree</button>
+
+                <div class="legend">
+                    <div class="content">
+                        <svg height="50" width="50">
+                            <rect x="5" y="5" height="40" width="40" stroke-width="2" fill="#ffffff" stroke="#000000" rx="7" ry="7"></rect>
+                        </svg>
+                        <p>Male</p>
+                    </div>
+                    <div class="content">
+                        <svg height="50" width="50">
+                            <rect x="5" y="5" height="40" width="40" stroke-width="2" fill="#ffffff" stroke="#000000" rx="100" ry="100"></rect>
+                        </svg>
+                        <p>Female</p>
+                    </div>
                 </div>
-                <div class="genotype-container">
-                    <p>Female</p>
-                    <form id="female-genotype-selection"></form>
+                <div class="legend">
+                    <div class="content">
+                        <svg height="50" width="50">
+                            <rect x="5" y="5" height="40" width="40" stroke-width="2" fill="#000000" stroke="#000000" rx="100" ry="100"></rect>
+                        </svg>
+                        <p>Affected</p>
+                    </div>
+                    <div class="content" id="carrier">
+                        <svg height="50" width="50">
+                            <rect x="5" y="5" height="40" width="40" stroke-width="2" fill="#ffffff" stroke="#000000" rx="100" ry="100"></rect>
+                            <rect x="20" y="20" height="10" width="10" stroke-width="2" fill="#000000" stroke="#000000" rx="100" ry="100"></rect>
+                        </svg>
+                        <p>Carrier</p>
+                    </div>
+                    <div class="content">
+                        <svg height="50" width="50">
+                            <rect x="5" y="5" height="40" width="40" stroke-width="2" fill="#ffffff" stroke="#000000" rx="100" ry="100"></rect>
+                        </svg>
+                        <p>Unaffected</p>
+                    </div>
                 </div>
 
-                <div class="children">
-                    <p class="question">Select how many children would you like the pair to have: </p>
-                    <select name="children" id="children">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
+                <p id="loading">LOADING...</p>
+
+                <div id="box">
+                    <div class="planet"></div>
+                    <div class="circle"></div>
+                    <div class="circle2"></div>
+                    <div class="circle3"></div>
+                    <div class="circle4"></div>
                 </div>
 
-                <div class="gen">
-                    <p class="question">Select how many total generations would you like to chart: </p>
-                    <select name="gen" id="gen"></select>
-                </div>
-
-                <button type="button" id="generate-pedigree">Generate Pedigree</button>
-            </div>
-
-            <button type="button" id="new-pedigree">New Pedigree</button>
-
-            <div class="legend">
-                <div class="content">
-                    <svg height="50" width="50">
-                        <rect x="5" y="5" height="40" width="40" stroke-width="2" fill="#ffffff" stroke="#000000" rx="7" ry="7"></rect>
-                    </svg>
-                    <p>Male</p>
-                </div>
-                <div class="content">
-                    <svg height="50" width="50">
-                        <rect x="5" y="5" height="40" width="40" stroke-width="2" fill="#ffffff" stroke="#000000" rx="100" ry="100"></rect>
-                    </svg>
-                    <p>Female</p>
-                </div>
-            </div>
-            <div class="legend">
-                <div class="content">
-                    <svg height="50" width="50">
-                        <rect x="5" y="5" height="40" width="40" stroke-width="2" fill="#000000" stroke="#000000" rx="100" ry="100"></rect>
-                    </svg>
-                    <p>Affected</p>
-                </div>
-                <div class="content" id="carrier">
-                    <svg height="50" width="50">
-                        <rect x="5" y="5" height="40" width="40" stroke-width="2" fill="#ffffff" stroke="#000000" rx="100" ry="100"></rect>
-                        <rect x="20" y="20" height="10" width="10" stroke-width="2" fill="#000000" stroke="#000000" rx="100" ry="100"></rect>
-                    </svg>
-                    <p>Carrier</p>
-                </div>
-                <div class="content">
-                    <svg height="50" width="50">
-                        <rect x="5" y="5" height="40" width="40" stroke-width="2" fill="#ffffff" stroke="#000000" rx="100" ry="100"></rect>
-                    </svg>
-                    <p>Unaffected</p>
-                </div>
-            </div>
-
-            <p id="loading">LOADING...</p>
-
-            <div id="box">
-                <div class="planet"></div>
-                <div class="circle"></div>
-                <div class="circle2"></div>
-                <div class="circle3"></div>
-                <div class="circle4"></div>
-            </div>
-
-            <div style="width:100%; height:700px;" id="tree"></div>
-        </main>
-        <footer>
-            <p>&#169;<span id="copyright-year"></span> Pedigree Chart Generator | Kate Clark</p>
-        </footer>
+                <div style="width:100%; height:700px;" id="tree"></div>
+            </main>
+            <footer>
+                <p>&#169;<span id="copyright-year"></span> Pedigree Chart Generator | Kate Clark</p>
+            </footer>
+        </div>
     </body>
 </html>
