@@ -1,1 +1,1 @@
-# Pedigree Project
+# Pedigree Chart Generator
