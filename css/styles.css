@@ -22,14 +22,12 @@ header {
 }
 
 main {
-    background-image: linear-gradient(to top, #ffffff 98.5%, #b4b4b4);
     padding: 2rem 1rem;
+    background-image: linear-gradient(to top, #ffffff 98.5%, #b4b4b4);
 }
 
 header {
     border-bottom: 4px solid #c9dd8e;
-    display: flex;
-    flex-direction: row;
     align-items: center;
 }
 
@@ -44,6 +42,7 @@ h1 {
     background: -webkit-linear-gradient(45deg, var(--highlight-color), #ffffff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    margin: 0 10%;
 }
 
 select:hover {
@@ -84,12 +83,9 @@ button:active {
 }
 
 footer {
-	position: absolute;
-	bottom: 0;
-	width: 100%;
     text-align: center;
     background-color: var(--main-color);
-    color: #ffffff;
+    color: #ecf0df;
     border-top: 4px solid #c9dd8e;
     font-size: smaller;
     letter-spacing: 0.07rem;
@@ -104,7 +100,7 @@ footer p {
 	display: none;
 }
 
-.genotype-container {
+.genotype-container, #type-selection {
     display: flex;
     flex-wrap: wrap;
 }
@@ -119,9 +115,10 @@ select {
 	width: auto;
 	padding: 0.5rem 0.5rem 0.5rem 1rem;
 	margin: 0.5rem;
+	font-family: inherit;
 }
 
-select, #male-genotype-selection label, #female-genotype-selection label {
+select, #male-genotype-selection label, #female-genotype-selection label, #type-selection label {
     font-size: 16pt;
     font-weight: bold;
     background-color: var(--highlight-color);
@@ -132,26 +129,25 @@ select, #male-genotype-selection label, #female-genotype-selection label {
     transition: 0.3s;
 }
 
-#male-genotype-selection label, #female-genotype-selection label {
+#male-genotype-selection label, #female-genotype-selection label, #type-selection label {
 	padding: 1rem;
-	margin-right: 1rem;
+	margin: 0.5rem 1rem 0.5rem 0;
 	cursor: pointer;
 }
 
-#male-genotype-selection label:hover, #female-genotype-selection label:hover {
+#male-genotype-selection label:hover, #female-genotype-selection label:hover, #type-selection label:hover {
 	opacity: 0.7;
 }
 
-#male-genotype-selection, #female-genotype-selection {
+#male-genotype-selection, #female-genotype-selection, #type-selection {
 	display: flex;
 	flex-direction: row;
 	padding: 1rem 0rem 2rem 1rem;
-	margin-bottom: 0.5rem;
-	margin-right: 0.75rem;
+	margin: 0.5rem;
 	border: 2px solid var(--main-color);
 }
 
-.legend, #male-genotype-selection, #female-genotype-selection {
+.legend, #male-genotype-selection, #female-genotype-selection, #type-selection {
     flex-wrap: wrap;
     border-radius: 7px;
     max-width: fit-content;
@@ -161,7 +157,7 @@ select, #male-genotype-selection label, #female-genotype-selection label {
     margin: 1rem 0;
 }
 
-#male-genotype-selection input[type="radio"]:checked + label, #female-genotype-selection input[type="radio"]:checked + label {
+#male-genotype-selection input[type="radio"]:checked + label, #female-genotype-selection input[type="radio"]:checked + label, #type-selection input[type="radio"]:checked + label {
 	background-color: var(--main-color);
 	color: var(--light-color);
 }
@@ -225,6 +221,28 @@ p {
 #tree {
 	display: none;
 	margin-bottom: 2rem;
+}
+
+.buttons {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.buttons button {
+	margin-right: 1rem;
+}
+
+button {
+	font-family: inherit;
+}
+
+#type-selection {
+	display: none;
+}
+
+.unselected {
+    background-color: var(--highlight-color);
+    color: var(--main-color);
 }
 
 #box {
@@ -306,5 +324,18 @@ p {
 		transform: rotate(360deg)
 			translate(-50px)
 			rotate(-360deg);
+	}
+}
+
+@media only screen and (min-width: 55rem) {
+
+	body {
+		background-color: #ecf0df;
+	}
+
+	main {
+		margin: 0 10%;
+		background-image: none;
+		background-color: #ffffff;
 	}
 }

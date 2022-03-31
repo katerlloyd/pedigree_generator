@@ -13,25 +13,124 @@ window.onload = () => {
 	};
 
 	// Get the inheritance type from the dropdown.
-	let inheritanceType = document.getElementById('type').value;
+	let inheritanceType = document.querySelector('input[name="inheritance-type"]:checked').value;
 
 	// Update the male/female genotype options and add/remove the carrier icon when the inheritance type is updated.
-	const checkInheritanceType = () => {
-		if (document.getElementById('type').value.includes('Recessive')) {
+    const checkInheritanceType = () => {
+        if (document.querySelector('input[name="inheritance-type"]:checked').value.includes('Recessive')) {
             const carrierIcon = document.getElementById('carrier');
             carrierIcon.style.display = 'flex';
         } else {
             const carrierIcon = document.getElementById('carrier');
             carrierIcon.style.display = 'none';
         }
-        inheritanceType = document.getElementById('type').value;
+        inheritanceType = document.querySelector('input[name="inheritance-type"]:checked').value;
+        console.log(inheritanceType);
 
-		removeMaleGenotypeList();
-		removeFemaleGenotypeList();
+        removeMaleGenotypeList();
+        removeFemaleGenotypeList();
         createMaleGenotypeList();
         createFemaleGenotypeList();
         return inheritanceType;
-	}
+    }
+
+	// Update the inheritance type when a selection is changed.
+    document.getElementById('type-selection').addEventListener('change', () => {
+//                autosomalListInput.forEach(radio => {
+//                    if (radio.checked) {
+//                        inheritanceType = radio.value;
+//                    }
+//                });
+		checkInheritanceType();
+    });
+
+	let autosomalButton = document.getElementById('autosomal-button');
+	autosomalButton.addEventListener('click', () => {
+		autosomalButton.classList.remove('unselected');
+		document.getElementById('sex-linked-button').classList.add('unselected');
+		document.querySelector('fieldset#type-selection').style.display = 'flex';
+
+        let sexLinkedListInput = document.querySelectorAll('.sex-linked-input');
+        sexLinkedListInput.forEach(item => {
+             item.defaultChecked = false;
+        });
+
+        let autosomalListInput = document.querySelectorAll('.autosomal-input');
+        autosomalListInput.forEach(item => {
+             item.defaultChecked = false;
+        });
+
+		let autosomalList = document.querySelectorAll('.autosomal');
+		autosomalList.forEach(item => {
+			item.style.display = "flex";
+		});
+
+		let sexLinkedList = document.querySelectorAll('.sex-linked');
+        sexLinkedList.forEach(item => {
+             item.style.display = "none";
+         });
+
+        autosomalListInput[0].defaultChecked = true;
+
+        autosomalListInput.forEach(radio => {
+            if (radio.checked) {
+                inheritanceType = radio.value;
+            }
+        });
+
+		inheritanceType = checkInheritanceType();
+//		return inheritanceType;
+	});
+
+	let sexLinkedButton = document.getElementById('sex-linked-button');
+    sexLinkedButton.addEventListener('click', () => {
+        sexLinkedButton.classList.remove('unselected');
+        document.getElementById('autosomal-button').classList.add('unselected');
+        document.querySelector('fieldset#type-selection').style.display = 'flex';
+
+        let autosomalListInput = document.querySelectorAll('.autosomal-input');
+        autosomalListInput.forEach(item => {
+             item.defaultChecked = false;
+        });
+
+        let sexLinkedListInput = document.querySelectorAll('.sex-linked-input');
+        sexLinkedListInput.forEach(item => {
+             item.defaultChecked = false;
+        });
+
+        let autosomalList = document.querySelectorAll('.autosomal');
+        autosomalList.forEach(item => {
+	        item.style.display = "none";
+         });
+
+		let sexLinkedList = document.querySelectorAll('.sex-linked');
+        sexLinkedList.forEach(item => {
+            item.style.display = "flex";
+         });
+
+        sexLinkedListInput[0].defaultChecked = true;
+
+        sexLinkedListInput.forEach(radio => {
+            if (radio.checked) {
+                inheritanceType = radio.value;
+            }
+        });
+
+        checkInheritanceType();
+//        return inheritanceType;
+    });
+
+    // Select the checked male radio button and sanitize input.
+//    	const maleFieldset = document.getElementById('male-genotype-selection').addEventListener('change', () => {
+//    		const maleRadios = document.querySelectorAll('input[name="male-genotype"]');
+//
+//            maleRadios.forEach(radio => {
+//                if (radio.checked) {
+//                    maleGenotype = radio.value;
+//                    maleGenotype = maleGenotype.replace(/\<sup\>/g, '').replace(/\<\/sup\>/g, '');
+//                }
+//            });
+//    	});
 
     const getFirstMaleGenotype = () => {
         let firstMaleGenotype = document.querySelector('input[name="male-genotype"]:checked').value;
@@ -157,9 +256,6 @@ window.onload = () => {
             }
         });
 	});
-
-	// Update the inheritance type when a selection is changed.
-    document.getElementById('type').addEventListener('change', checkInheritanceType);
 
 	// Set count to ensure that all generations have at least one marriage and child until the last generation.
 	let count = 1;

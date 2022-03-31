@@ -24,17 +24,26 @@
                 <noscript>Your browser does not support JavaScript.</noscript>
 
                 <div id="principle">
-                    <div class="type">
-                        <label class="question">Select an inheritance type:
-                            <select name="type" id="type">
-                                <option value="Autosomal Dominant">Autosomal Dominant</option>
-                                <option value="Autosomal Recessive">Autosomal Recessive</option>
-                                <option value="X-Linked Dominant">X-Linked Dominant</option>
-                                <option value="X-Linked Recessive">X-Linked Recessive</option>
-                                <option value="Y-Linked">Y-Linked</option>
-                            </select>
-                        </label>
-                    </div>
+                    <form class="type">
+                        <label class="question">Select an inheritance type: </label>
+                            <div class="buttons">
+                                <button type="button" id="autosomal-button" class="unselected">Autosomal</button>
+                                <button type="button" id="sex-linked-button" class="unselected">Sex-Linked</button>
+                            </div>
+                            <fieldset id="type-selection">
+                                <input type="radio" class="autosomal-input" id="autosomal-dominant" name="inheritance-type" value="Autosomal Dominant" checked>
+                                <label for="autosomal-dominant" class="autosomal">Autosomal Dominant</label>
+                                <input type="radio" class="autosomal-input" id="autosomal-recessive" name="inheritance-type" value="Autosomal Recessive">
+                                <label for="autosomal-recessive" class="autosomal">Autosomal Recessive</label>
+                                <input type="radio" class="sex-linked-input" id="x-linked-dominant" name="inheritance-type" value="X-Linked Dominant">
+                                <label for="x-linked-dominant" class="sex-linked">X-Linked Dominant</label>
+                                <input type="radio" class="sex-linked-input" id="x-linked-recessive" name="inheritance-type" value="X-Linked Recessive">
+                                <label for="x-linked-recessive" class="sex-linked">X-Linked Recessive</label>
+                                <input type="radio" class="sex-linked-input" id="y-linked" name="inheritance-type" value="Y-Linked">
+                                <label for="y-linked" class="sex-linked">Y-Linked</label>
+                                <legend>Inheritance Type</legend>
+                            </fieldset>
+                    </form>
 
                     <p class="question">Select the genotypes of the first two individuals: </p>
                     <form class="genotype-container">
@@ -113,7 +122,7 @@
                 <div style="width:100%; height:700px;" id="tree"></div>
             </main>
             <footer>
-                <p>&#169;<span id="copyright-year"></span> Pedigree Chart Generator | Kate Lloyd</p>
+                <p>&#169;<span id="copyright-year"></span> Pedigree Chart Generator &#149; Kate Lloyd</p>
             </footer>
         </div>
     </body>
