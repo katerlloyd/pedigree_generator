@@ -2,7 +2,7 @@
 
 Here is a [link](https://katereclark.github.io/pedigree_generator/) to the page.
 
-This application utilizes code provided by the [Balkan FamilyTreeJS](https://balkan.app/FamilyTreeJS/) site to draw the chart itself.
+This application utilizes code provided by the [BALKAN FamilyTreeJS](https://balkan.app/FamilyTreeJS/) site to draw the chart itself.
 
 ## HOME SCREEN
 
