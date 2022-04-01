@@ -7,10 +7,14 @@ This application utilizes code provided by the [Balkan FamilyTreeJS](https://bal
 ## HOME SCREEN
 
 ### EXAMPLE 1
-![Pedigree chart input 1](/images/main-1.jpg)
+![Pedigree chart input 1](/images/primary-1.jpg)
 
 ### EXAMPLE 2
-![Pedigree chart input 2](/images/main-2.jpg)
+![Pedigree chart input 2](/images/primary-2.jpg)
+
+
+### EXAMPLE 3
+![Pedigree chart input 2](/images/primary-3.jpg)
 
 ## CHART GENERATION AND LEGEND
 
