@@ -39,10 +39,10 @@ h1 {
     color: var(--highlight-color);
     letter-spacing: 0.1rem;
     margin: 0;
+    padding: 0 1rem;
     background: -webkit-linear-gradient(45deg, var(--highlight-color), #ffffff);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin: 0 10%;
 }
 
 select:hover {
@@ -337,5 +337,9 @@ button {
 		margin: 0 10%;
 		background-image: none;
 		background-color: #ffffff;
+	}
+
+	h1 {
+		margin: 0 10%;
 	}
 }

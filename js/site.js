@@ -12,8 +12,8 @@ window.onload = () => {
 	    selectGen.appendChild(option);
 	};
 
-	// Get the inheritance type from the dropdown.
-	let inheritanceType = document.querySelector('input[name="inheritance-type"]:checked').value;
+	// Initialize the inheritance type.
+	let inheritanceType = 'Autosomal Dominant';
 
 	// Update the male/female genotype options and add/remove the carrier icon when the inheritance type is updated.
     const checkInheritanceType = () => {
@@ -24,14 +24,76 @@ window.onload = () => {
             const carrierIcon = document.getElementById('carrier');
             carrierIcon.style.display = 'none';
         }
+
         inheritanceType = document.querySelector('input[name="inheritance-type"]:checked').value;
-        console.log(inheritanceType);
 
         removeMaleGenotypeList();
         removeFemaleGenotypeList();
         createMaleGenotypeList();
         createFemaleGenotypeList();
         return inheritanceType;
+    }
+
+    // Build the autosomal inheritance type radio list selection.
+    const createAutosomalInheritanceTypeList = () => {
+        const fieldset = document.getElementById('type-selection');
+
+        let list = ['Autosomal Dominant', 'Autosomal Recessive'];
+
+        list.forEach(item => {
+            let input = document.createElement('input');
+            input.setAttribute('type', 'radio');
+            input.setAttribute('id', `${item.toLowerCase().replace(/ /g, '-')}`);
+            input.setAttribute('name', 'inheritance-type');
+            input.setAttribute('value', `${item}`);
+            fieldset.appendChild(input);
+
+            let label = document.createElement('label');
+            label.setAttribute('for', `${item.toLowerCase().replace(/ /g, '-')}`);
+            label.innerHTML = item;
+            fieldset.appendChild(label);
+        });
+
+        let legend = document.createElement('legend');
+        legend.textContent = 'Inheritance Type';
+        fieldset.appendChild(legend);
+
+        fieldset.firstChild.defaultChecked = true;
+        checkInheritanceType();
+    }
+
+	// Build the sex-linked inheritance type radio list selection.
+    const createSexLinkedInheritanceTypeList = () => {
+        const fieldset = document.getElementById('type-selection');
+
+        let list = ['X-Linked Dominant', 'X-Linked Recessive', 'Y-Linked'];
+
+        list.forEach(item => {
+            let input = document.createElement('input');
+            input.setAttribute('type', 'radio');
+            input.setAttribute('id', `${item.toLowerCase().replace(item, ' ', '-')}`);
+            input.setAttribute('name', 'inheritance-type');
+            input.setAttribute('value', `${item}`);
+            fieldset.appendChild(input);
+
+            let label = document.createElement('label');
+            label.setAttribute('for', `${item.toLowerCase().replace(item, ' ', '-')}`);
+            label.innerHTML = item;
+            fieldset.appendChild(label);
+        });
+
+        let legend = document.createElement('legend');
+        legend.textContent = 'Inheritance Type';
+        fieldset.appendChild(legend);
+
+        fieldset.firstChild.defaultChecked = true;
+        checkInheritanceType();
+    }
+
+    // Remove the inheritance type radio list selection.
+    const removeInheritanceTypeList = () => {
+        const items = document.querySelector('#type-selection');
+        items.innerHTML = '';
     }
 
 	// Selection button for displaying the autosomal inheritance type options.
@@ -41,29 +103,8 @@ window.onload = () => {
 		document.getElementById('sex-linked-button').classList.add('unselected');
 		document.querySelector('fieldset#type-selection').style.display = 'flex';
 
-        let sexLinkedListInput = document.querySelectorAll('.sex-linked-input');
-
-        let autosomalListInput = document.querySelectorAll('.autosomal-input');
-
-		let autosomalList = document.querySelectorAll('.autosomal');
-		autosomalList.forEach(item => {
-			item.style.display = "flex";
-		});
-
-		let sexLinkedList = document.querySelectorAll('.sex-linked');
-        sexLinkedList.forEach(item => {
-             item.style.display = "none";
-         });
-
-        autosomalListInput[0].defaultChecked = true;
-
-        autosomalListInput.forEach(radio => {
-            if (radio.checked) {
-                inheritanceType = radio.value;
-            }
-        });
-
-		inheritanceType = checkInheritanceType();
+		removeInheritanceTypeList();
+		createAutosomalInheritanceTypeList();
 	});
 
 	// Selection button for displaying the sex-linked inheritance type options.
@@ -73,40 +114,21 @@ window.onload = () => {
         document.getElementById('autosomal-button').classList.add('unselected');
         document.querySelector('fieldset#type-selection').style.display = 'flex';
 
-        let autosomalListInput = document.querySelectorAll('.autosomal-input');
-
-        let sexLinkedListInput = document.querySelectorAll('.sex-linked-input');
-
-        let autosomalList = document.querySelectorAll('.autosomal');
-        autosomalList.forEach(item => {
-	        item.style.display = "none";
-         });
-
-		let sexLinkedList = document.querySelectorAll('.sex-linked');
-        sexLinkedList.forEach(item => {
-            item.style.display = "flex";
-         });
-
-        sexLinkedListInput[0].defaultChecked = true;
-
-        sexLinkedListInput.forEach(radio => {
-            if (radio.checked) {
-                inheritanceType = radio.value;
-            }
-        });
-
-        checkInheritanceType();
+		removeInheritanceTypeList();
+        createSexLinkedInheritanceTypeList();
     });
 
     // Update the inheritance type when a selection is changed.
     document.getElementById('type-selection').addEventListener('change', checkInheritanceType);
 
+	// Obtain and sanitize first generation male genotype.
     const getFirstMaleGenotype = () => {
         let firstMaleGenotype = document.querySelector('input[name="male-genotype"]:checked').value;
         firstMaleGenotype = firstMaleGenotype.replace(/\<sup\>/g, '').replace(/\<\/sup\>/g, '');
         return firstMaleGenotype;
     }
 
+	// Obtain and sanitize first generation female genotype.
     const getFirstFemaleGenotype = () => {
         let firstFemaleGenotype = document.querySelector('input[name="female-genotype"]:checked').value;
         firstFemaleGenotype = firstFemaleGenotype.replace(/\<sup\>/g, '').replace(/\<\/sup\>/g, '');
