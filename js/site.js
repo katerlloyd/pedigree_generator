@@ -34,16 +34,7 @@ window.onload = () => {
         return inheritanceType;
     }
 
-	// Update the inheritance type when a selection is changed.
-    document.getElementById('type-selection').addEventListener('change', () => {
-//                autosomalListInput.forEach(radio => {
-//                    if (radio.checked) {
-//                        inheritanceType = radio.value;
-//                    }
-//                });
-		checkInheritanceType();
-    });
-
+	// Selection button for displaying the autosomal inheritance type options.
 	let autosomalButton = document.getElementById('autosomal-button');
 	autosomalButton.addEventListener('click', () => {
 		autosomalButton.classList.remove('unselected');
@@ -51,14 +42,8 @@ window.onload = () => {
 		document.querySelector('fieldset#type-selection').style.display = 'flex';
 
         let sexLinkedListInput = document.querySelectorAll('.sex-linked-input');
-        sexLinkedListInput.forEach(item => {
-             item.defaultChecked = false;
-        });
 
         let autosomalListInput = document.querySelectorAll('.autosomal-input');
-        autosomalListInput.forEach(item => {
-             item.defaultChecked = false;
-        });
 
 		let autosomalList = document.querySelectorAll('.autosomal');
 		autosomalList.forEach(item => {
@@ -79,9 +64,9 @@ window.onload = () => {
         });
 
 		inheritanceType = checkInheritanceType();
-//		return inheritanceType;
 	});
 
+	// Selection button for displaying the sex-linked inheritance type options.
 	let sexLinkedButton = document.getElementById('sex-linked-button');
     sexLinkedButton.addEventListener('click', () => {
         sexLinkedButton.classList.remove('unselected');
@@ -89,14 +74,8 @@ window.onload = () => {
         document.querySelector('fieldset#type-selection').style.display = 'flex';
 
         let autosomalListInput = document.querySelectorAll('.autosomal-input');
-        autosomalListInput.forEach(item => {
-             item.defaultChecked = false;
-        });
 
         let sexLinkedListInput = document.querySelectorAll('.sex-linked-input');
-        sexLinkedListInput.forEach(item => {
-             item.defaultChecked = false;
-        });
 
         let autosomalList = document.querySelectorAll('.autosomal');
         autosomalList.forEach(item => {
@@ -117,20 +96,10 @@ window.onload = () => {
         });
 
         checkInheritanceType();
-//        return inheritanceType;
     });
 
-    // Select the checked male radio button and sanitize input.
-//    	const maleFieldset = document.getElementById('male-genotype-selection').addEventListener('change', () => {
-//    		const maleRadios = document.querySelectorAll('input[name="male-genotype"]');
-//
-//            maleRadios.forEach(radio => {
-//                if (radio.checked) {
-//                    maleGenotype = radio.value;
-//                    maleGenotype = maleGenotype.replace(/\<sup\>/g, '').replace(/\<\/sup\>/g, '');
-//                }
-//            });
-//    	});
+    // Update the inheritance type when a selection is changed.
+    document.getElementById('type-selection').addEventListener('change', checkInheritanceType);
 
     const getFirstMaleGenotype = () => {
         let firstMaleGenotype = document.querySelector('input[name="male-genotype"]:checked').value;
