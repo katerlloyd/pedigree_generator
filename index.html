@@ -21,6 +21,13 @@
                 <noscript>Your browser does not support JavaScript.</noscript>
 
                 <div id="principle">
+                    <h2>Welcome to the Pedigree Chart Generator!</h2>
+                    <p>Please enter the following information to generate a randomized pedigree chart. These charts are ideal for classroom or personal use.</p>
+                    <p>Start by selecting one of the two general inheritance types to see their specific options. If no inheritance type is selected, the system will choose Autosomal Dominant by default.</p>
+                    <p>Note that each individual who merges with the main family branch (or marries into the family) will be assigned a random genotype. Each individual has a 75% change of finding a permanent mate (marrying) and can have anywhere from no offspring to four offspring.</p>
+                    <br>
+                    <hr>
+                    <br>
                     <form class="type">
                         <label class="question">Select an inheritance type: </label>
                             <div class="buttons">
@@ -37,7 +44,7 @@
                     </form>
 
                     <div class="children">
-                        <label class="question">Select how many children would you like the pair to have:
+                        <label class="question">Select how many offspring you would like the first pair to have:
                             <select name="children" id="children">
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -48,7 +55,7 @@
                     </div>
 
                     <div class="gen">
-                        <label class="question">Select how many total generations would you like to chart:
+                        <label class="question">Select how many total generations you would like to chart:
                             <select name="gen" id="gen"></select>
                         </label>
                     </div>
