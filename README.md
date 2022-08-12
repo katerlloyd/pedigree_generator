@@ -1,6 +1,6 @@
 # Pedigree Chart Generator
 
-Here is a [link](https://katereclark.github.io/pedigree_generator/) to the page.
+Here is a [link](https://katerlloyd.github.io/pedigree_generator/) to the page.
 
 This application utilizes code provided by the [BALKAN FamilyTreeJS](https://balkan.app/FamilyTreeJS/) site to draw the chart itself.
 
